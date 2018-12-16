@@ -1,0 +1,230 @@
+
+<div class="logo">
+    <a href="" class="simple-text logo-mini">
+    </a>
+    <a href="" class="simple-text logo-normal">
+       Branch <br>Dashboard
+    </a>
+</div>
+
+<div class="sidebar-wrapper" >
+    <ul class="nav" align="left">
+
+        <li class="nav-item" uk-accordion style="color: white;display: flex;flex-direction: column;" align="left">
+             <span class="nav-item" style="color: white;">
+             <a class="uk-accordion-title btn btn-primary btn-block" href="#" (click)="col1cl()" [style.background-color]="col1" style="
+             background-color:rgba(0, 0, 0, 0.1);color: white; font-size: 14px;transform: scale(1.2);" ><span style="color: white; opacity: 1;">&nbsp; &nbsp;<b>·</b> Branch Activity
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'My Information' ||  menuItem.title == 'Managing Employees' || menuItem.title == 'Benefits' || menuItem.title == 'Equipments' || menuItem.title =='Branch Configurations'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a>
+                        </ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" href="#" (click)="col2cl()" [style.background-color]="col2" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>·</b> Attendance Taking
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Branch Attendance reports' ||  menuItem.title == 'Your Attendance'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a>
+                        </ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" href="#" (click)="col3cl()" [style.background-color]="col3" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Holiday Management
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'View Public Holidays' ||  menuItem.title == 'Set Public Holidays' || menuItem.title == 'Assign Holidays Types' || menuItem.title == 'Create Holidays Types' || menuItem.title =='Book Holiday' || menuItem.title =='Approve Holidays' || menuItem.title == 'Holiday History'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a>
+                    </ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" href="#" (click)="col4cl()" [style.background-color]="col4" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Appraisal
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Appraisal Period' ||  menuItem.title == 'Appraisal Evaluate' || menuItem.title == 'My Appraisal' || menuItem.title == 'Objective setting'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col5cl()" [style.background-color]="col5" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Weekly Reporting
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'View Reports' ||  menuItem.title == 'Submit Report'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col6cl()" [style.background-color]="col6" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Grievance Management
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'File Grievance' ||  menuItem.title == 'Grievance & Disciplinary' || menuItem.title == 'Disciplinary Response'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col7cl()" [style.background-color]="col7" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Disciplinary Management
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'File Disciplinary' ||  menuItem.title == 'Grievance & Disciplinary' || menuItem.title == 'Grievance Response'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col8cl()" [style.background-color]="col8" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Business trip
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Set Business Trip Info' ||  menuItem.title == 'Request Business Trip' || menuItem.title == 'Approve Trips'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+               <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col9cl()" [style.background-color]="col9" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Expense Claim
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Approve reimbursement'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col10cl()" [style.background-color]="col10" href="#" style="background-color:#197cd3;transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Org chart creation
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Chart' || menuItem.title=='View Chart'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col11cl()" [style.background-color]="col11" href="#" style="background-color:#197cd3;transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Hand Book
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title =='Upload Handbook' ||  menuItem.title == 'View Handbook'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col13cl()" [style.background-color]="col13" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Notice Board
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'View Notices' || menuItem.title == 'Upload Notices'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span> 
+            <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col14cl()" [style.background-color]="col14" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Appointment
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Your Appointment' || menuItem.title == 'Approve Appointment' || menuItem.title =='Book Appointment'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span>
+             <span class="nav-item" style="color: white">
+                <a class="uk-accordion-title btn btn-primary btn-block" (click)="col12cl()" [style.background-color]="col12" href="#" style="background-color:rgba(0, 0, 0, 0.1);transform: scale(1.2);color: white; font-size: 14px"><span style="color: white; opacity: 1">&nbsp; &nbsp;<b>· </b>Your Team
+                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a>
+                <div class="uk-accordion-content" style="color: white">
+                    <ul class="nav">
+                       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                        <ng-container *ngIf="menuItem.title == 'Team Attendance reports' || menuItem.title == 'Team Holiday Approval' || menuItem.title =='Team Objective setting' || menuItem.title =='Team Appraisal' || menuItem.title == 'Team Weekly Reports' || menuItem.title == 'Team Grievance Response' || menuItem.title == 'File Team Disciplinary' || menuItem.title=='Team Trip Approval'">
+                        <a [routerLink]="[menuItem.path]">
+                            <i class="now-ui-icons {{menuItem.icon}}"></i>
+                            <p style="transform: scale(1.18);">{{menuItem.title}}</p>
+                        </a></ng-container>
+                    </li>
+                    </ul>
+                </div>
+            </span> 
+            </li>
+    </ul>
+</div>

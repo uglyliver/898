@@ -1,0 +1,37 @@
+<div align="center">
+
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Your Package info, Cancel your Subscription or Upgrade</h6>
+</div>
+	<div *ngIf="booll" style="width: 85%;margin-left: 6%; margin-right: 6% " align="center">
+		<div class="" style="width: 90%; color: black" >
+										<div class="card card-user">
+											<div class="image" style="background-color: #bdbdbd;height: 12vh;" align="center"><br><p style="font-size: 27px;color: black"> {{pack.name}} </p>
+											</div>
+											<div class="card-body">
+												<div class="">
+													<p style="">
+														<span style="font-size: 2vw;"><b>${{pack.pricepermonth}}</b></span> per month
+													</p>
+													<p style="">Min users: {{pack.minusers}}</p>
+												</div>
+												<p class="description text-center">
+													{{pack.description}}
+												</p>
+												<div *ngFor="let feats of pack.features | splite2">
+													<span style="color: orange; transform: scale(1.5);">✔</span> {{feats}}
+												</div>
+											</div>
+										</div>
+									</div>
+
+					<button class="btn btn-primary btn-block" (click)="close()">
+													Upgrade
+												</button>Or <br>
+												<button class="btn btn-danger btn-block" (click)="close()">
+													Cancel Subscription
+												</button>
+
+						</div>
+
+</div>

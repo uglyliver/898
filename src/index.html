@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <base href='/'>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Do+Hyeon|Josefin+Sans|Lato|Lobster|Montserrat|Open+Sans|PT+Sans|Raleway|Roboto|Roboto+Condensed|Roboto+Slab|Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Employee Manager</title>
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /><!-- 
+    <link rel="stylesheet" href="node_modules/ng2-org-chart/styles.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Open+Sans|Roboto:300" rel="stylesheet">
+    <meta name="viewport" content="width=device-width" />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <style>
+.map {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 40px
+}
+
+.map-wrap {
+    background: #4e7cad url(./assets/img/bg.png);
+    padding: 1px;
+    border-radius: 3px;
+    position: relative
+}
+
+.map-label {
+    line-height: 60px;
+    font-size: 24px;
+    margin: 0;
+    color: #4e7cad;
+    font-family: monospace
+}
+
+.map-label span {
+    display: block
+}
+
+.map-label .map-label-name {
+    float: left;
+    width: 50%;
+    padding-right: 10px;
+    text-align: right
+}
+
+.map-label .map-label-time {
+    margin-left: 50%;
+    padding-left: 10px;
+    text-align: left
+}
+
+.map-inset {
+    padding-bottom: 50%;
+    background: url(./assets/img/world.png) 50% 50%;
+    background-size: cover;
+    position: relative;
+    border-radius: 2px
+}
+
+.map-inset span {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: #fff;
+    position: absolute;
+    border-radius: 3px;
+    border: 1px solid #4e7cad
+}
+
+.map-inset span.active {
+    background: #4e7cad
+}
+
+.map-inset .map-axis-x {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid rgba(78, 124, 173, 0.5);
+    width: 0;
+    transition: left 50ms ease-out
+}
+
+.map-inset .map-axis-y {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px solid rgba(78, 124, 173, 0.5);
+    height: 0;
+    transition: top 50ms ease-out
+}
+.is-moment-timezone .hero {
+    background-color: #4e7cad;
+    box-shadow: inset 0 10px 10px #4e7cad
+}</style>
+</head>
+    <body>
+        <app-root></app-root>
+    </body>
+</html>

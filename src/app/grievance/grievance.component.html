@@ -1,0 +1,359 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, file grievance and Disciplinary.</h6>
+</div>
+
+<div class="col-md-12" id="top">
+	<div class="card">
+		<div *ngIf="uploadbool;" class="main-content" style="width: 99%; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+			<div class="row" align="center">
+			<div class="col-md-12 pr-1">
+				<div class="form-group">
+					<label style="color: black">Upload Attachments
+					</label>
+					<angular-file-uploader  style="color: white"
+					[config]="afuConfig"
+					[resetUpload]=resetVar
+					(ApiResponse)="DocUpload($event)">
+				</angular-file-uploader>
+			</div>
+		</div>
+		<div class="col-md-12 pr-1">
+			<div class="table-responsive" style="min-height: 30vh">
+				<p style="font-size: 15px"><b>Attachments</b></p>
+				<table class="table" >
+					<thead class=" text-primary">
+						<th>
+							File name 
+						</th><th>Uploader</th>
+						<th>
+							Action
+						</th>
+					</thead>
+					<tbody>
+
+						<tr *ngFor="let file of filesarr">
+							<td>
+								<p>{{file.filename}}</p>
+							</td>
+							<td>
+							<ng-container *ngIf="file.party==1" ><p>Employee</p></ng-container>
+							<ng-container *ngIf="file.party==2"><p>Manager</p></ng-container>
+							</td>
+							<td>
+								<a target="blank" href="{{envin2 + '/commerce/download/comp/' + file.fileid}} " class="btn btn-primary" style="color: white">Download</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<button class="btn btn-primary btn-block" style="color: white" (click)="close_upload()"
+					>Submit Attachments</button>
+		</div><!-- 
+		<button class="btn btn-neutral btn-block" (click)="close_upload()">
+							go back?</button> -->
+			</div>
+			</div>
+			
+
+		<div *ngIf="discbool2;" class="main-content" style="width: 99%; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+			<div class="row" align="center">
+				    <div class="col-md-12">
+				    	<div class="form-group">
+						<label style="color: black">Enter Justification &nbsp; &nbsp; &nbsp;</label>
+				   <textarea name="desc2" #desc2 id="desc2" rows="10" style="width: 100%"></textarea>
+				    </div>
+				</div>
+				<div class="col-md-12 pr-1">
+				<div class="form-group">
+					<label style="color: black">Upload Attachments
+					</label>
+					<angular-file-uploader  style="color: white"
+					[config]="afuConfig2"
+					[resetUpload]=resetVar2
+					(ApiResponse)="DocUpload2($event)">
+				</angular-file-uploader>
+			</div>
+		</div>
+				<div class="col-md-12">
+					<button class="btn btn-primary btn-block" style="color: white; background-color: blue"
+					(click)="submit_just(desc2.value)">Submit Justification</button>
+				    </div>
+				<div class="col-md-12" align="center">
+		<button class="btn btn-neutral btn-sm" (click)="close_just()">
+							go back?</button></div>
+			</div>
+		</div>
+
+
+			<div *ngIf="uploadbool2;" class="main-content" style="width: 99%; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+			<div class="row" align="center">
+		
+		<div class="col-md-12 pr-1">
+			<div class="table-responsive" style="min-height: 30vh">
+				<p style="font-size: 15px"><b>Your Attachments</b></p>
+				<table class="table" >
+					<thead class=" text-primary">
+						<th>
+							File name 
+						</th><th>
+							Uploader
+						</th>
+						<th>
+							Action
+						</th>
+					</thead>
+					<tbody>
+
+						<tr *ngFor="let file of filesarr2">
+							<td>
+								<p>{{file.filename}}</p>
+							</td>
+							<td>
+							<ng-container *ngIf="file.party==1" ><p>Employee</p></ng-container>
+							<ng-container *ngIf="file.party==2"><p>Manager</p></ng-container>
+							</td>
+							<td>
+								<a target="blank" href="{{envin2 + '/commerce/download/comp/' + file.fileid}} " class="btn btn-primary" style="color: white">Download</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<button class="btn btn-primary btn-block" style="color: white" (click)="close_upload2()"
+					>Go Back?</button>
+		</div><!-- 
+		<button class="btn btn-neutral btn-block" (click)="close_upload()">
+							go back?</button> -->
+			</div>
+			</div>
+
+		
+	<div class="card-header">
+    </div>
+			<div class="card-header">
+				<h4 class="card-title">Grievance filing</h4>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+						<label style="color: black" >Enter Grievance Title &nbsp; &nbsp; &nbsp;</label>
+					<input type="text" name="title" #title style="width: 100%" placeholder="eg, Harrasment" id="title">
+				    </div></div>
+				    <div class="col-md-12">
+				    	<div class="form-group">
+						<label style="color: black">Enter Grievance Description &nbsp; &nbsp; &nbsp;</label>
+					<textarea name="desc" id="desc" #desc rows="10" style="width: 100%"></textarea>
+				    </div>
+				</div>
+				
+					<div class="col-md-12">
+					<button class="btn btn-primary btn-block" style="color: white; background-color: blue"
+					(click)="open_upload(title.value, desc.value)">Submit</button>
+				    </div>
+				    <div class="col-md-12">
+					<button class="btn btn-primary btn-block" style="color: white; background-color: white">History</button>
+				    </div>
+				</div>
+			</div>
+			<div  class="card-body">
+				<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h5 align="center" style="color: black">
+							Search For Specific Period History
+							</h5>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Title
+							</th>
+							<th>
+								Description
+							</th>
+							<th>
+								Dated
+							</th>
+							<th>
+								Manager Reply
+							</th>
+							<th>
+								Type
+							</th>
+							<th>
+								Status
+							</th>
+							<th>
+								Outcome
+							</th>
+							<th>
+								Outcome Date
+							</th>
+							<th>
+								Files
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.comparr; index as i2">
+								<ng-container *ngIf="feat.type == 'grievance'">
+									<ng-container  *ngIf="(feat.lodged>=startdate && feat.lodged<=enddate) || (startdate == undefined && enddate == undefined)">
+								<td style="margin-left: 0.2vw">
+									{{i2 + 1}}
+								</td>
+								<td>
+									{{feat.actiontype}}
+								</td>
+								<td>
+									{{feat.reasonse}}
+								</td>
+								<td>
+									{{feat.lodged}}
+								</td>
+								<td>
+									{{feat.reasonsm}}
+								</td>
+								<td>
+									{{feat.type}}
+								</td>
+								<td>
+									<ng-container *ngIf="feat.hr=='1'">Approved</ng-container>
+									<ng-container *ngIf="feat.hr!='1'">Unapproved</ng-container>
+								</td>
+								<td>
+									{{feat.outcome}}
+								</td>
+								<td>
+									{{feat.outcomedate}}
+								</td>
+								<td>
+								<button class="btn btn-primary" (click) = "open_upload2(feat)">Download</button>
+								</td>
+							</ng-container></ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		<!-- 		<div class="card-body" *ngIf="switchbool">
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th style="max-width: 500px">
+						Serial No.
+					</th>
+					<th style="max-width: 500px">
+						From
+					</th>
+					<th style="max-width: 500px">
+						To
+					</th>
+					<th style="max-width: 500px">
+						Title
+					</th>
+					<th style="max-width: 500px">
+						Description
+					</th>
+					<th style="max-width: 500px">
+						Dated
+					</th>
+					<th style="max-width: 500px">
+						Justification
+					</th>
+					<th style="max-width: 500px">
+						Type
+					</th>
+					<th style="max-width: 500px">
+						Status
+					</th>
+					<th style="max-width: 500px">
+						Outcome
+					</th>
+					<th style="max-width: 500px">
+						Outcome Date
+					</th>
+					<th style="max-width: 500px">
+						Files
+					</th>
+					<th style="max-width: 500px">
+						Justification
+					</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.compagarr; index as i2">
+						<td style="margin-left: 0.2vw">
+							{{i2 + 1}}
+						</td>
+						<td>
+							{{idtoname(feat.eid1)}}
+						</td>
+		
+						<td>
+							{{idtoname(feat.eid2)}}
+						</td>
+						<td>
+							{{feat.actiontype}}
+						</td>
+						<td>
+							{{feat.reasonse}}
+						</td>
+						<td>
+							{{feat.lodged}}
+						</td>
+						<td>
+							{{feat.reasonsm}}
+						</td>
+						<td>
+							{{feat.type}}
+						</td>
+						<td>
+							<ng-container *ngIf="feat.hr=='1'">Approved</ng-container>
+							<ng-container *ngIf="feat.hr!='1'">Unapproved</ng-container>
+						</td>
+						<td style="max-width: 500px">
+							{{feat.outcome}}
+						</td>
+						<td>
+							{{feat.outcomedate}}
+						</td>
+						<td>
+							<button class="btn btn-primary" (click) = "open_upload2(feat)">Download</button>
+							
+						</td>
+						<td>
+							<button class="btn btn-primary" (click) = "open_disc2(feat.id)">Write</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+					</div> -->
+			</div>
+
+
+		</div>
+	</div>
+
+

@@ -1,0 +1,95 @@
+
+<div style="min-width: 2000000px; min-height: 2000000px; background-color: #8A0707 ;position: absolute;z-index: 10000000000; overflow: scroll;" *ngIf="this.result =='result'"></div>
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View Your Information Here</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+	 <div class="card-header">
+	  <h4 class="card-title">Employee Details</h4> <br>
+	  <div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row" *ngIf="loaded">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Name</label>
+	  								<p><b>{{emparr.name}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Email</label>
+	  								<p><b>{{emparr.email}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Employee-ID</label>
+	  								<p><b>{{emparr.id}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Pan</label>
+	  								<p><b>{{emparr.pan}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Salary(USD)</label>
+	  								<p><b>{{emparr.salary}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Role</label>
+	  								<p><b>{{emparr.role}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Type</label>
+	  								<p><b>{{emparr.type}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Date of birth</label>
+	  								<p><b>{{emparr.dob | slice:0:10}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Joining Date</label>
+	  								<p><b>{{emparr.joindate | slice:0:10}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Benefits Provided</label>
+	  								<p><b>{{emparr.benefit | slice:1}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Equipments Provided</label>
+	  								<p><b>{{emparr.equip | slice:1}} </b></p>
+	  							</div>
+	  						</div>
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<button  class="btn btn-primary btn-block"  style="background-color: white" ></button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+</div>
+</div>
+
+

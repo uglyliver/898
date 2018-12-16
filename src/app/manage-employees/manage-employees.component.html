@@ -1,0 +1,598 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Employees here</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+		<div *ngIf="editembool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: darkviolet" >
+						<div class="card-header">
+							<h5 class="title">Edit Employee {{brancharray[i].name}}</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-4 pr-1">
+										<div class="form-group">
+											<label style="color: white">Employee Name</label>
+											<input type="text" #some1 id="some1" value="{{brancharray[i].name}}" class="form-control"  name="some1">
+										</div>
+									</div>
+									<div class="col-md-8 pr-1">
+										<div class="form-group">
+											<label style="color: white">Email Id></label>
+											<input type="text" disabled="" #some2 id="some2" value="{{brancharray[i].email}}" class="form-control"  name="some2" >
+										</div>
+									</div>
+									<div class="col-md-12 px-1">
+										<div class="form-group">
+											<label style="color: white">PAN card Number</label>
+											<input type="text" #some4 id="some4" value="{{brancharray[i].pan}}" class="form-control"  name="some4">
+										</div>
+									</div>
+								</div>
+		<div class="row">
+			<div class="col-md-6 pl-1">
+				<div class="form-group">
+					<label style="color: white">Employee Type</label>
+					<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+						<div  ngbDropdown>
+							<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+								Select
+							</button>
+							<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+								<a *ngFor="let feat of this.data.emptypearr index as i" class="dropdown-item" (click)="selcomsz(feat.name)">{{feat.name}}</a>
+							</div>
+						</div>
+						<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+							<input type="text" disabled="" class="form-control" value="{{selcomszval}}">
+						</div></div>
+					</div>
+				</div>
+				<div class="col-md-6 pl-1">
+					<div class="form-group">
+						<label style="color: white">Employee Role</label>
+						<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+							<div  ngbDropdown>
+								<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+									Select
+								</button>
+								<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+									<a *ngFor="let feat2 of this.data.emprolearr index as i" id="feat2{{i}}" class="dropdown-item" (click)="selcoms(feat2.name)">{{feat2.name}}</a>
+								</div>
+							</div>
+							<div style="margin-left: 10px;width: 50%; margin-top: 2%" >
+								<input type="text" disabled="" class="form-control" value="{{selcomsval}}">
+							</div></div>
+						</div>
+					</div>
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label style="color: white">Salary</label>
+							<input type="text" #some7  value="{{brancharray[i].salary}}" id="some7" class="form-control"  name="some7" >
+						</div>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<p style="color: white">{{emmsg}}</p>
+								<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_ed_br({email: some2.value, name: some1.value,pan: some4.value,type: selcomszval, dob: brancharray[i].dob , salary: some7.value})">Submit</button>
+								<button class="btn btn-neutral btn-sm" (click)="open_edit(i)">
+									go back?
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div *ngIf="editbranchbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+<div class="row" >
+	<div class="col-md-12">
+		<div class="card"style="color: white; background-color: #388e3c" >
+			<div class="card-header">
+				<h5 class="title">Add Employee</h5>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="row">
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<label style="color: white">Employee Name</label>
+								<input type="text" #some1 id="some1" class="form-control"  name="some1">
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<label style="color: white">Email id <span style="color: black">{{email1}}</span></label>
+								<input type="text" [(ngModel)]="emailvar" #some2 id="some2" class="form-control" name="some2">
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<label style="color: white">Join Date <span style="color: black">{{joinmsg}}</span></label>
+								<input type="Date" #some3 id="some3" class="form-control" [max]="max" [value]="max" name="some3">
+							</div>
+						</div>
+						<div class="col-md-8 px-1">
+							<div class="form-group">
+								<label style="color: white">PAN card Number</label>
+								<input type="text" #some4 id="some4" class="form-control"   name="some4">
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group">
+								<label style="color: white">Date of Birth <span style="color: black">{{dobmsg}}</span> </label>
+								<input type="Date" #some5 id="some5" class="form-control" [value]="max2" [max]="max2" name="some5" >
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 pl-1">
+							<div class="form-group">
+								<label style="color: white">Employee Type</label>
+								<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+									<div  ngbDropdown>
+										<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+											Select
+										</button>
+										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+											<a *ngFor="let feat of this.data.emptypearr index as i" class="dropdown-item" (click)="selcomsz(feat.name)">{{feat.name}}</a>
+										</div>
+									</div>
+									<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+										<input type="text" disabled="" class="form-control" value="{{selcomszval}}">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 pl-1">
+							<div class="form-group">
+								<label style="color: white">Employee Role</label>
+								<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+									<div  ngbDropdown>
+										<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+											Select
+										</button>
+										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+											<a *ngFor="let feat2 of this.data.emprolearr index as i" id="feat2{{i}}" class="dropdown-item" (click)="selcoms(feat2.name)">{{feat2.name}}</a>
+										</div>
+									</div>
+									<div style="margin-left: 10px;width: 50%; margin-top: 2%" >
+										<input type="text" disabled="" class="form-control" value="{{selcomsval}}">
+									</div></div>
+								</div>
+							</div>
+							<div class="col-md-6 pr-1">
+								<div class="form-group">
+									<label style="color: white">Salary</label>
+									<input type="text" #some7 id="some7" class="form-control"  name="some7" >
+								</div>
+							</div>
+
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_cr_br({
+										email: some2.value,
+										name: some1.value,
+										pan: some4.value,
+										type: selcomszval,
+										dob: some5.value,
+										joindate:some3.value,
+										salary: some7.value})">Submit</button>
+										<button class="btn btn-neutral btn-sm" (click)="gobacktocr()">
+											go back?
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="benbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+		<div class="row" >
+			<div class="col-md-12">
+				<div class="card"style="color: white; background-color: darkviolet" >
+					<div class="card-header">
+						<h5 class="title">Add Employee Benefits</h5>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="row">
+								<div class="col-md-12 pr-1">
+									<div class="form-group">
+										<label style="color: white">All Benefits</label>
+										<button *ngFor="let feat of this.data.benifitsarr; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="selben(i)">{{feat.name}}</button>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-md-12 pr-1">
+									<div class="form-group">
+										<label style="color: white">Selected Benefits</label>
+										<button *ngFor="let feat2 of this.data.benifitsarr2; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="selben2(i)">{{feat2.name}}</button>
+									</div>
+								</div>
+								<br><br><br>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_bn()">Submit</button>
+
+									</div>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div *ngIf="empbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000;" align="center">
+		<div class="row" >
+			<div  class="col-md-12" >
+	<div class="card" style="background-color: #197cd3 ">
+	 <div class="card-header">
+	  <h4 class="card-title">Employee Details</h4> <br>
+	  <div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Name</label>
+	  								<p><b>{{empcur.name}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Email</label>
+	  								<p><b>{{empcur.email}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Employee-ID</label>
+	  								<p><b>{{empcur.id}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Pan</label>
+	  								<p><b>{{empcur.pan}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Salary(USD)</label>
+	  								<p><b>{{empcur.salary}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Role</label>
+	  								<p><b>{{empcur.role}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Type</label>
+	  								<p><b>{{empcur.type}} </b></p>
+	  							</div>
+	  						</div><div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Date of birth</label>
+	  								<p><b>{{empcur.dob | slice:0:10}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Joining Date</label>
+	  								<p><b>{{empcur.joindate | slice:0:10}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Benefits Provided</label>
+	  								<p><b>{{empcur.benefit | slice:1}} </b></p>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Equipments Provided</label>
+	  								<p><b>{{empcur.equip | slice:1}} </b></p>
+	  							</div>
+	  						</div>
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<button  class="btn btn-primary btn-block"  style="background-color: white; color: black" (click)="closeemp()" >Go Back?</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+</div>
+</div>
+		</div>
+	</div>
+	<div *ngIf="shiftbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; ">
+	<div class="row" >
+		<div class="col-md-12">
+			<div class="card"style="color: white; background-color: darkviolet" >
+				<div class="card-header" align="center">
+					<h5 class="title">Manage Employee Shifts</h5>
+				</div>
+				<div class="card-header" >
+					<h6 class="title">Current Alloted Shift: {{temp1}} {{temp2}} {{temp3}} {{temp4}} {{temp5}}  </h6>
+				</div>
+				<div  class="card-body" align="center">
+	<h6>List View of Currently Available Branch Shifts</h6>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Shift Name
+					</th>
+					<th>
+						Start Time
+					</th>
+					<th>
+						End Time
+					</th>
+					<th>
+						Core hours Start Time
+					</th><th>
+						Core hours End Time
+					</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.shift_array; index as i2">
+						<td style="margin-left: 0.2vw">
+							{{i2 + 1}}
+						</td>
+						<td>
+							{{feat.name}}
+						</td>
+						<td>
+							{{feat.stime}}
+						</td>
+						<td>
+							{{feat.etime}}
+						</td>
+						<td>
+							{{feat.cstime}}
+						</td>
+						<td>
+							{{feat.cetime}}
+						</td>
+						<td>
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="select_shift(feat.id, feat.name, feat.stime, feat.etime, feat.cstime, feat.cetime)">Select</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-neutral btn-sm" (click)="closeshift()">
+									go back?
+								</button>
+		</div>
+	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div *ngIf="eqbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: white; background-color: darkviolet" >
+					<div class="card-header">
+						<h5 class="title">Add Employee Equipments</h5>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="row">
+								<div class="col-md-12 pr-1">
+									<div class="form-group">
+										<label style="color: white">All Equipments</label>
+										<button *ngFor="let feat of this.data.equipmentsarr; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="seleq(i)">{{feat.name}}</button>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-md-12 pr-1">
+									<div class="form-group">
+										<label style="color: white">Selected Benefits</label>
+										<button *ngFor="let feat2 of this.data.equipmentsarr2; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="seleq2(i)">{{feat2.name}}</button>
+									</div>
+								</div>
+								<br><br><br>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_eq()">Submit</button>
+
+									</div>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+								</div>
+	<div class="card-header">
+		<div class="card-header" style="" >
+			<button class="btn btn-primary btn-block" style="color: white" align="center"
+			(click)="gobacktocr()"><h4 class="card-title">Add Employee</h4></button>
+		</div>
+		<h4 class="card-title">List View Of Employees</h4>
+		<div class="col-md-12">
+			<label style="color: black">Search Employee</label>
+			<input style="color: black" type="text" #sync [(ngModel)]="emp_sync" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+		</div>
+	</div>
+	<div *ngIf="!editbranchbool;" class="card-body">
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Email
+					</th>
+					<th>
+						PAN Number
+					</th>
+					<th>
+						D.O.B
+					</th>
+					<th>
+						Join date
+					</th>
+					<th>
+						Salary
+					</th>
+					<th>
+						type
+					</th>
+					<th>
+						role
+					</th>
+					<th>
+						Email verification
+					</th>
+					<th>
+						View
+					</th><th></th><th></th>
+					<th>
+						Shifts
+					</th>
+					<th></th><th></th>
+					<th>
+						Benefits
+					</th>
+					<th></th><th></th>
+					<th>
+						Equipments
+					</th>
+					<th>
+						Actions
+					</th>
+				</thead>
+				<tbody>
+<tr *ngFor="let feat of this.brancharray; index as i2">
+	<ng-container *ngIf="feat.name.startsWith(emp_sync)">
+	<td style="margin-left: 0.2vw">
+		{{i2 + 1}}
+	</td>
+	<td>
+		{{feat.name}}
+	</td>
+	<td>
+		{{feat.email}}
+	</td>
+	<td>
+		{{feat.pan}}
+	</td>
+	<td>
+		{{feat.dob}}
+	</td>
+	<td>
+		{{feat.joindate}}
+	</td>
+	<td>
+		{{feat.salary}}
+	</td>
+	<td>
+		{{feat.type}}
+	</td>
+	<td>
+		{{feat.role}}
+	</td>
+	<td>
+		{{feat.emailver}}
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="opnemp(feat)">Open</button>
+	</td><td></td>
+	<td>	<!-- /updateEmployee -->
+			<div  ngbDropdown (click)="opnshift2(feat.shiftid,feat.email,feat.branchid)">
+				<a id="dropdownBasic1" ngbDropdownToggle></a>
+				<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+					<a  class="dropdown-item" >Name: {{temp1}} Start: {{temp2}} End: {{temp3}} Core Start: {{temp4}} Core End: {{temp5}}</a>
+				</div>
+			</div>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="opnshift(feat.shiftid,feat.email,feat.branchid)">Shifts</button>
+	</td>
+	<td></td>
+	<td>	<!-- /updateEmployee -->
+			<div  ngbDropdown>
+				<a id="dropdownBasic1" ngbDropdownToggle></a>
+				<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+					<a  class="dropdown-item" >{{feat.benefit}}</a>
+				</div>
+			</div>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="opnben(feat.email,feat.equip,feat.branchid)">Benefits</button>
+	</td><td></td>
+	<td>	<!-- /updateEmployee -->
+			<div  ngbDropdown>
+				<a id="dropdownBasic1" ngbDropdownToggle></a>
+				<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+					<a  class="dropdown-item" >{{feat.equip}}</a>
+				</div>
+			</div>
+		</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="opneq(feat.email,feat.benefit,feat.branchid)">Equipments</button>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_edit(i2)">Edit</button>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="del_edit(feat.id)">Delete</button>
+	</td>
+</ng-container>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+

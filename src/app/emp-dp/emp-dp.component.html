@@ -1,0 +1,58 @@
+<div  style="background-color: black;height: 10vh ! important; width: 100vw;"></div>
+<!-- https://github.com/timcreative/freebies/blob/master/LICENSE.md-->
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Create Departments</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Departments Name
+            </th>
+            <th >
+             Submit
+           </th>
+         </thead>
+         <tbody>
+          <tr>
+            <div style="margin-top: 2vh;">
+              <input type="text" #create id="create" class="form-control" placeholder="New Departments"></div>
+             <td>
+              <div style="display: flex;flex-direction: row; align-content: center;">
+                <div style="margin-left: 2vw;"><button class="btn btn-primary btn-block" (click)="this.data.createdp(create.value)" >Submit &nbsp;<i class="now-ui-icons ui-1_check" style="transform: scale(1.5);"></i></button></div>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-header">
+      <h4 class="card-title">View Departments</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Departments
+            </th>
+         </thead>
+         <tbody>
+          <tr  *ngFor="let feat of this.data.empdparr index as i" id="feat{{i}}" > <!-- -->
+            <td>
+              {{feat.name}}
+            </td>
+              <td>
+                <button class="btn btn-primary btn-block">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

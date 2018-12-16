@@ -1,0 +1,461 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">All Your Attendance Related Info is here</h6>
+</div>
+<div  class="col-md-10">
+
+</div>
+
+<div  class="col-md-12" >
+	<div class="card">
+	<div class="card-header">
+      <h4 class="card-title">Clock IN/OUT</h4>
+      <h6 class="card-title">Your Current Shift: </h6>
+      <p>Name: {{temp1}}, Start time: {{temp2}}, End time: {{temp3}},Core start time: {{temp4}}, Core end time: {{temp5}}</p>
+
+		<div *ngIf="clockoutbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: #00897b" >
+						<div class="card-header">
+							<h5 class="title">Are You Sure to Clock Out</h5>
+						</div>
+						<div class="card-body">
+							<button  class="btn btn-outline-primary" style="background-color: black; margin: 2%;" (click)="clock_out()" >
+								Yes, Clock me out
+							</button>
+							<button  class="btn btn-outline-primary" style="background-color: blue" (click)="open_clock_out()" >No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div *ngIf="latebool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: #00897b" >
+						<div class="card-header">
+							<h5 class="title">Late Arrival Reason</h5>
+						</div>
+						<div class="card-body">
+						<form >
+	  					<div class="row">
+	  						<div class="col-md-12 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: white">Description</label>
+	  								<textarea style="color: white" placeholder="Describe your Reason here..." #late id="late" class="form-control"  name="late" ></textarea>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+							<button  class="btn btn-outline-primary" style="background-color: blue" (click)="latearrival('true',late.value)" >Submit & ClockIn</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	  <div class="row" >
+	  	<div class="col-md-12">
+<div class="card"style=" background-color: white">
+<div class="card-body">
+<form>
+<div class="row" *ngIf="!customclockout;">
+	<div class="col-md-5">
+		<div class="form-group"> <!-- for disabled color #616161 -->
+			<label style="color: blue">{{this.msg1}}</label>
+			<button class="btn btn-primary btn-block" style="width: 100%; background-color: #4dd0e1" (click)="clock_in()"><span style="font-size: 18px">Clock In</span><a style="color: white" uk-icon="icon: sign-in"></a>
+			</button>
+			<label style="color: red">{{this.msg2}}</label>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group"></div>
+	</div>
+	<div class="col-md-5">
+		<div class="form-group">
+			<label style="color: blue">{{this.msg3}}</label>
+			<button class="btn btn-primary btn-block" style="width: 100%; background-color: #004d40" (click)="open_clock_out()"><span style="font-size: 18px">Clock Out</span><a style="color: white" uk-icon="icon: sign-out"></a>
+			</button>
+			<label style="color: red">{{this.msg4}}</label>
+		</div>
+	</div>
+</div>
+<div class="row" *ngIf="customclockout;">
+	<div class="col-md-4">
+		<div class="form-group"> <!-- for disabled color #616161 -->
+			<p style="color: red">You Didn't Clock Out Last time.</p>
+			<p style="color: red">Previous Clock In time: {{previntime}}</p>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="form-group">
+			<label style="color: black">Enter previous Clock out Time</label>
+			<div class="row">
+				<div class="col-md-4">
+			<button  class="btn btn-primary"  style="" (click)="open()">Pick</button></div>
+				<div class="col-md-8">
+			<input type="time" #some id="some" class="form-control" disabled=""  name="some"  value="{{selectedTime}}"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="form-group">
+			<label style="color: red">{{this.msg4}} {{this.msg3}} </label>
+			<button class="btn btn-primary btn-block" style="width: 100%; background-color: #c2185b" (click)="custom_clock_out(some.value)"><span style="font-size: 18px">Submit</span><a style="color: white" uk-icon="icon: sign-out"></a>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<button  class="btn btn-primary btn-block"  style="background-color: #000000;"></button>
+		</div>
+	</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card-header">
+	  <h4 class="card-title">Update Your Overtime Details</h4> <br>
+	  <h6 class="card-title">Current Grant: <br> {{time3 || 0}} hours, Converted To : {{convertman}}, Description: {{descman}}</h6>
+	  <h6 class="card-title">Update Details:</h6>
+	  <div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form >
+	  					<div class="row">
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Hours Requested per week</label>
+	  								<input type="text" #some1 id="some1" [value]="time2" placeholder="eg, 40" class="form-control"  name="some1">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<div style="display: flex;flex-direction: row; " >
+	  									<div  ngbDropdown>
+	  										<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+	  											Select
+	  										</button>
+	  										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+	  											<a *ngFor="let feat of this.work_con; index as i" class="dropdown-item" (click)="sel(feat)">{{feat}}</a>
+	  										</div>
+	  									</div>
+	  									<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+	  										<input type="text" disabled="" class="form-control" value="{{selval}}">
+	  									</div>
+	  								</div>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-12 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Description</label>
+	  								<textarea placeholder="Describe your proposal here..." [value]="description" #some2 id="some2" class="form-control"  name="some2" > </textarea>
+	  							</div>
+	  						</div>
+	  						
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_overtime(some1.value, some2.value, selval)" >Submit</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+  </div>
+<div  class="card-body">
+	<div class="main-content" style="width: 99%;height:90%;">
+		<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 align="center" style="color: black">
+							Search For Specific Period History
+							</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: black; background-color: #e0f7fa" align="center">
+					<div class="card-header" align="center">
+						<h5 class="title">View Your Attendance History</h5>
+					</div>
+					
+		<div class="card-body">
+		
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table">
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Date
+					</th>
+					<th>
+						Hours Worked
+					</th>
+					<th>
+						Insufficient Hours:
+					</th>
+					<th>
+						Overtime Hours
+					</th>
+					<th>
+						Late Arrival?
+					</th>
+					<th>
+						Late Reason
+					</th>
+					<th>
+						Clock In/out
+					</th>
+				</thead>
+				<tbody>
+<tr *ngFor="let feat of this.dailyarr; index as i2" >
+
+	<ng-container  *ngIf="(feat.date>=startdate && feat.date<=enddate) || (startdate == undefined && enddate == undefined)">
+		<ng-container *ngIf="feat.late == 'true' || feat.insufficient > 0">
+	<td style="margin-left: 0.2vw;background-color: #ef5350 ">
+		{{i2 + 1}}
+	</td>
+	<td style="color: #ef5350 ">
+		{{feat.date}}
+	</td>
+	<td style="color: #ef5350 ">
+		{{feat.worked | number:'.1-2'}}
+	</td>
+	<td style="color: #ef5350 ">
+		{{feat.insufficient | number:'.1-2'}}
+	</td>
+	<td style="color: #ef5350 ">
+		{{feat.overtime | number:'.1-2'}}
+	</td>
+	<td style="color: #ef5350">
+		{{feat.late || false}}
+	</td>
+	<td style="color: #ef5350">
+		{{feat.reason}}
+	</td>
+	 <td style="background-color: #e0f7fa;">
+	 	<div  ngbDropdown>
+		<button id="dropdownConfig2" class="btn btn-outline-primary btn-block" style="background-color: orange" ngbDropdownToggle>
+			View
+		</button>
+		<div class="dropdown-menu dropdown-menu-right" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			<div class="table-responsive" style="background-color: #e0f7fa;">
+												<table class="table" style="background-color: #e0f7fa;">
+													<thead class=" text-primary" style="background-color: #e0f7fa;">
+														<th>
+															ClockIns
+														</th>
+														<th>
+															ClockOuts
+														</th>
+														<th>
+															CustomOut
+														</th>
+													</thead>
+													<tbody style="background-color: #e0f7fa;">
+														<ng-container *ngFor="let clock of feat.clock">
+														<ng-container *ngIf="clock.customClockout == 'true'">
+														<tr style="color: #ef5350 ">
+															<td>
+																<p >{{clock.intime}}<br></p>
+															</td>
+															<td>
+																<p>{{clock.outtime}}</p>
+															</td>
+															<td>
+																<p>{{clock.customClockout}}<br></p>
+															</td>
+														</tr>
+														</ng-container>
+														<ng-container *ngIf="clock.customClockout != 'true'">
+														<tr>
+															<td>
+																<p>{{clock.intime}}<br></p>
+															</td>
+															<td>
+																<p>{{clock.outtime}}</p>
+															</td>
+															<td>
+																<p>{{clock.customClockout}}<br></p>
+															</td>
+														</tr>
+														</ng-container>
+														</ng-container>
+													</tbody>
+												</table>
+											</div>
+										</div>
+			  	</div>
+										
+	</td>
+</ng-container>
+		<ng-container *ngIf="feat.late != true && feat.insufficient <= 0">
+	<td style="margin-left: 0.2vw">
+		{{i2 + 1}}
+	</td>
+	<td>
+		{{feat.date}}
+	</td>
+	<td>
+		{{feat.worked | number:'.1-2'}}
+	</td>
+	<td>
+		{{feat.insufficient | number:'.1-2'}}
+	</td>
+	<td>
+		{{feat.overtime | number:'.1-2'}}
+	</td>
+	<td>
+		{{feat.late || false}}
+	</td>
+	<td>
+		{{feat.reason}}
+	</td>
+	 <td style="background-color: #e0f7fa;">
+	 	<div  ngbDropdown>
+		<button id="dropdownConfig2" class="btn btn-outline-primary btn-block" style="background-color: orange" ngbDropdownToggle>
+			View
+		</button>
+		<div class="dropdown-menu dropdown-menu-right" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			<div class="table-responsive" style="background-color: #e0f7fa;">
+												<table class="table" style="background-color: #e0f7fa;">
+													<thead class=" text-primary" style="background-color: #e0f7fa;">
+														<th>
+															ClockIns
+														</th>
+														<th>
+															ClockOuts
+														</th>
+														<th>
+															CustomOut
+														</th>
+													</thead>
+													<tbody style="background-color: #e0f7fa;">
+														<ng-container *ngFor="let clock of feat.clock">
+														<ng-container *ngIf="clock.customClockout == 'true'">
+														<tr style="color: #ef5350 ">
+															<td>
+																<p >{{clock.intime}}<br></p>
+															</td>
+															<td>
+																<p>{{clock.outtime}}</p>
+															</td>
+															<td>
+																<p>{{clock.customClockout}}<br></p>
+															</td>
+														</tr>
+														</ng-container>
+														<ng-container *ngIf="clock.customClockout != 'true'">
+														<tr>
+															<td>
+																<p>{{clock.intime}}<br></p>
+															</td>
+															<td>
+																<p>{{clock.outtime}}</p>
+															</td>
+															<td>
+																<p>{{clock.customClockout}}<br></p>
+															</td>
+														</tr>
+														</ng-container>
+														</ng-container>
+													</tbody>
+												</table>
+											</div>
+										</div>
+			  	</div>
+										
+	</td>
+</ng-container>
+</ng-container>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+					<!-- <div class="card-body" align="left">
+						<h6>Late Arrivals and other imp flags</h6>
+						<ul uk-accordion style="display: flex;flex-direction: column;">
+							<ng-container class="" *ngFor="let feat of this.dailyarr; index as i">
+								<ng-container *ngIf="feat.date>=startdate && feat.date<=enddate"><span >
+									<a class="uk-accordion-title" href="#" style="font-size: 18px"><b>{{feat.date}}</b></a>
+									<p style="font-size:13px"><b>Min branch Hours:</b> {{feat.minWH}}, &nbsp;&nbsp; <br><b>Hours Worked:</b> {{feat.worked  | number:'.1-2'}}, &nbsp;&nbsp; <br><b>Insufficient Hours:</b> {{feat.insufficient | number:'.1-2'}},&nbsp;&nbsp;  <br>
+										<b>Overtime Hours:</b> {{feat.overtime  | number:'.1-2'}},  &nbsp;&nbsp; <br><b>Arrived late:</b> {{feat.lateArrival}} </p>
+										<div class="uk-accordion-content">
+											<div class="table-responsive" style="min-height: 30vh">
+												<table class="table" >
+													<thead class=" text-primary">
+														<th>
+															ClockIns
+														</th>
+														<th>
+															ClockOuts
+														</th>
+														<th>
+															CustomOut
+														</th>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+																<p  *ngFor="let clock of feat.clock">{{clock.intime}}<br></p>
+															</td>
+															<td>
+																<p  *ngFor="let clock of feat.clock">{{clock.outtime}}</p>
+															</td>
+															<td>
+																<p  *ngFor="let clock of feat.clock">{{clock.customClockout}}<br></p>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</span></ng-container></ng-container>
+								</ul>
+							</div> -->
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

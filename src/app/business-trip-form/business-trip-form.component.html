@@ -1,0 +1,414 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Equipments here</h6>
+</div>
+<div  class="col-md-12" id="top">
+	<div *ngIf="uploadbool;" class="main-content" style="width: 99%;padding: 30px; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+		<div class="row" align="center">
+			<h4>Upload All your Attachments relevant to the Business Trip(eg, Travel Tickets, Hotel Reservation Information) for Branch Reference</h4>
+			<div class="col-md-12 pr-1">
+				<div class="form-group">
+					<label style="color: black">Upload Attachments
+					</label>
+					<angular-file-uploader  style="color: white"
+					[config]="afuConfig"
+					[resetUpload]=resetVar
+					(ApiResponse)="DocUpload($event)">
+				</angular-file-uploader>
+			</div>
+		</div>
+		<div class="col-md-12 pr-1">
+			<div class="table-responsive" style="min-height: 30vh">
+				<p style="font-size: 15px"><b>Attachments</b></p>
+				<table class="table" >
+					<thead class=" text-primary">
+						<th>
+							File name 
+						</th>
+						<th>
+							Action
+						</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let file of filesarr">
+							<td>
+								<p>{{file.filename}}</p>
+							</td>
+							<td>
+								<a target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-12" align="center">
+			<button class="btn btn-neutral btn-sm" (click)="close_upload()">
+			go back?</button>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="uploadbool2;" class="main-content" style="width: 99%;padding: 30px; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+	<div class="row" align="center">
+		<h5>Upload All your Attachments relevant to the Business Trip(eg, Travel Tickets, Hotel Reservation Information) for Reimbursement From Accounting Department</h5>
+				<h6 style="color: white">Add Reimbursement information of each part mentioning date and providing proof via attachments</h6>
+				<p align="center" style="color: white">Amount Left in Budget: {{budget-cur20}} <br></p>
+		<form >
+			<div class="row" align="center">
+				<div class="col-md-6 pr-1">
+					<div class="form-group"> <!-- for disabled color #616161 -->
+						<label style="color: white" >Date</label>
+						<input type="date" [(ngModel)]="datef" id="some21" name="some21" #some21 class="form-control">
+					</div>
+				</div>
+				<div class="col-md-6 pr-1">
+					<div class="form-group"> <!-- for disabled color #616161 -->
+						<label style="color: white" >Amount</label>
+						<input type="number" [(ngModel)]="amnt" id="amnt0" name="amnt0" #amnt0 class="form-control">
+					</div>
+				</div>
+				<div class="col-md-12 pr-1">
+					<div class="form-group"> <!-- for disabled color #616161 -->
+						<label style="color: white" >Description</label>
+						<textarea type="text" [(ngModel)]="desc" id="some20" name="some20" #some20 placeholder="eg, Stay at baker street" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+		<p *ngIf="budget-cur20 -amnt < 0" style="color: white">You Have exhausted your budget</p>
+
+	<div class="col-md-12 pr-1" *ngIf="budget-cur20-amnt>=0">
+			<div class="form-group">
+				<label style="color: black">Upload Attachments
+				</label>
+				<angular-file-uploader  style="color: white"
+				[config]="afuConfig2"
+				[resetUpload]=resetVar
+				(ApiResponse)="DocUpload2($event)">
+			</angular-file-uploader>
+		</div>
+	</div>
+	<div class="col-md-12 pr-1">
+		<div class="table-responsive" style="min-height: 30vh">
+			<p style="font-size: 15px"><b>Attachments</b></p>
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						File name 
+					</th>
+					<th>
+						Date 
+					</th>
+					<th>
+						Description
+					</th>
+					<th>
+						Amount 
+					</th>
+					<th>
+						Currency used 
+					</th>
+					<th>
+						Action
+					</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let file of filesarr2">
+						<td>
+							<p>{{file.filename}}</p>
+						</td>
+						<td>
+							<p>{{file.datef}}</p>
+						</td>
+						<td>
+							<p>{{file.description}}</p>
+						</td>
+						<td>
+							<p>{{file.amount}}</p>
+						</td>
+						<td>
+							<p>{{file.currency1}}</p>
+						</td>
+						<td>
+							<a target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-12" align="center">
+		<button class="btn btn-neutral btn-sm" (click)="close_upload2()">
+		go back?</button>
+	</div>
+</div>
+</div>
+
+
+<div *ngIf="countrybool" style="position: absolute;z-index: 1000;width: 100%; display: flex;flex-direction: row;flex-wrap: wrap; justify-content: center;background-color: darkviolet">
+	<form style="padding: 30px;">
+		<div class="row" >
+			<div class="col-md-12 pr-1">
+				<div class="form-group">
+					<label style="color: white" ><br><br>Country Name Search</label>
+					<input type="text" #sync [(ngModel)]="country_sync" id="sync" class="form-control"  name="sync" placeholder="eg, India " >
+				</div>
+			</div>
+			<div class="col-md-12 pr-1">
+				<ng-container *ngFor="let v of this.country">
+					<ng-container *ngIf="v.country.startsWith(country_sync)">
+						<button class="btn btn-primary" (click)="sel_country(v.country)">{{v.country}}
+						</button>
+					</ng-container>
+				</ng-container>
+			</div>
+			<div class="col-md-12 pr-1" align="center">
+				<button class="btn btn-neutral btn-sm" (click)="close_country()">
+					go back?
+				</button></div>
+			</div>
+		</form>
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<h4 class="card-title">Form For Business Trip</h4>
+		</div>
+		<div class="card-body">
+			<form>
+				<div class="row">
+					<div class="col-md-5 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue" >Reason For Travel</label>
+							<input type="text" id="some1" name="some1" #some1 placeholder="eg, Buisness Deal" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-3 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue">Select Country</label>
+							<button class="btn btn-primary " style="width: 100%; background-color: #4dd0e1" (click)="open_country()">Open
+							</button>
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue">Selected Country</label>
+							<input type="text"  class="form-control" disabled="" [value]="country_val" >
+						</div>
+					</div>
+					<div class="col-md-6 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue" >Date of Departure</label>
+							<input type="date" id="some2" #some2 name="some2" placeholder="eg, Flight" class="form-control" >
+						</div>
+					</div>
+					<div class="col-md-6 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue" >Date of Arrival</label>
+							<input type="date" id="some3" #some3 name="some3" placeholder="eg, Flight" class="form-control" >
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue" >Currency preferred </label>
+							<input type="text" id="some42" #some42 name="some42" placeholder="eg, usd" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue" >Total estimated Budget <span style="color:red">*(In Preferred Currency)</span> </label>
+							<input type="text" id="some4" #some4 name="some4" placeholder="eg, 1000" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group"> <!-- for disabled color #616161 -->
+							<label style="color: blue">Visa Required </label>
+							<select id="yn" #yn name="yn" (click)="f(yn.value)"  class="btn btn-primary">
+								<option value="1"  class="btn btn-primary">Yes</option>
+								<option value="0"  class="btn btn-primary">No</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="card-header">
+			<h5>Current Rules List Set Your Requirements and Submit</h5>
+			<p style="color: red; font-size: 17px">Leave 0 if not required.</p>
+			<p style="color: red; font-size: 17px">Greater than limit value wont be considered.</p>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Country Name
+							</th>
+							<th>
+								Expense Category
+							</th>
+							<th>
+								PerDay
+							</th>
+							<th>
+								Expense Name
+							</th>
+							<th>
+								Maximum Value
+							</th>
+							<th>
+								Your Request 
+							</th>
+							<th>
+								Your Need 
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.rulearr; index as i2">
+								<ng-container *ngIf="feat.country == country_val">
+								<td>
+									{{feat.country}}
+								</td>
+								<td>
+									{{feat.category}}
+								</td>
+								<td>
+									{{feat.perDay}}
+								</td>
+								<td>
+									{{feat.name}}
+								</td>
+								<td>
+									{{feat.value}}
+								</td>
+								<td>
+									{{feat.val}}
+								</td>
+								<td>	<!-- take care of country only rules value etc -->
+									<ng-container *ngIf="feat.val > feat.value">
+									<input type="number" style="color: red" name="inp" id="inp" #inp [(ngModel)]="feat.val" class="form-control">	
+									</ng-container>
+									<ng-container *ngIf="feat.val <= feat.value">
+									<input placeholder="1" type="number" [(ngModel)]="feat.val" name="inp" id="inp" #inp style="color: blue" class="form-control">
+									</ng-container>
+								</td>
+								</ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label > </label>
+					<button class="btn btn-primary btn-block" (click)="submit_trip({currency: some42.value, reason: some1.value,country: country_val, budget: some4.value, dateDep: some2.value, dateArr: some3.value, visa: yn.value })" >Submit Details for Approval
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-header">
+			<h4 class="card-title">List View Of your trips(chronological order)</h4>
+		</div>
+		<div  class="card-body">
+
+				<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 align="center" style="color: black">
+							Search For Specific Period History
+							</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+					</div>
+					<br><br>
+				</form>
+			</div>
+			<div class="table-responsive" style="min-height: 30vh">
+				<table class="table" >
+					<thead class=" text-primary">
+						
+						<th>
+							Country
+						</th>
+						<th>
+							Currency
+						</th>
+						<th>
+							Reason
+						</th>
+						<th>
+							Departure
+						</th>
+						<th>
+							Arrival
+						</th>
+						<th>
+							Budget
+						</th>
+						<th>
+							Approval Status
+						</th>
+						<th>
+							Post Approval
+						</th>
+						<th>
+							Reimbursement
+						</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let feat of this.triparr; index as i2">
+				<ng-container  *ngIf="(feat.trip.dateDep>=startdate && feat.trip.dateDep<=enddate) || (startdate == undefined && enddate == undefined)">
+							<td>
+								{{feat.trip.country}}
+							</td>
+							<td>
+								{{feat.trip.currency}}
+							</td>
+							<td>
+								{{feat.trip.reason}}
+							</td>
+							<td>
+								{{feat.trip.dateDep}}
+							</td>
+							<td>
+								{{feat.trip.dateArr}}
+							</td>
+							<td>
+								{{feat.trip.estBud}}
+							</td>
+							<td>
+		<ng-container *ngIf="feat.trip.approved=='1'">Approved</ng-container>
+		<ng-container *ngIf="feat.trip.approved!='1'">Unapproved</ng-container>
+							</td>
+							<td>
+								<ng-container *ngIf="feat.trip.approved==1">
+								<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_upload(feat)">Add attachments</button></ng-container>
+								<ng-container *ngIf="feat.trip.approved!=1">
+								<button disabled="" class="btn btn-primary btn-block"  style="color: white" >Add attachments</button></ng-container>
+							</td>
+							<td>
+								<ng-container *ngIf="feat.trip.approved==1">
+								<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_upload2(feat)">Claim</button></ng-container>
+								<ng-container *ngIf="feat.trip.approved!=1">
+								<button disabled="" class="btn btn-primary btn-block"  style="color: white">Claim</button></ng-container>
+								
+							</td>
+						</ng-container>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

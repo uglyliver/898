@@ -1,0 +1,331 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Packages here</h6>
+</div>
+
+<div  class="col-md-12">
+	<div class="card">
+		<div *ngIf="editpackbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card" background-color: #bdbdbd>
+						<div class="card-header">
+							<h5 class="title">Edit Package</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-7 pr-1">
+										<div class="form-group">
+											<label>Name</label>
+											<input type="text" #some1 id="some1" class="form-control" [(ngModel)]="cur_pack2.name" name="some1">
+										</div>
+									</div>
+									<div class="col-md-3 px-1">
+										<div class="form-group">
+											<label>Min Users</label>
+											<input type="number" #some2 id="some2" class="form-control" [(ngModel)]="cur_pack2.minusers" name="some2">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-10 pr-1">
+										<div class="form-group">
+											<label>Description</label>
+											<input type="text"  #some3 id="some3"class="form-control" [(ngModel)]="cur_pack2.description" name="some3" >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 pr-1">
+										<div class="form-group">
+											<label>Price per month</label>
+											<input type="number" #some4 id="some4" class="form-control" [(ngModel)]="cur_pack2.pricepermonth" name="some4" >
+										</div>
+									</div>
+									<div class="col-md-3 px-1">
+										<div class="form-group">
+											<label>Price per year</label>
+											<input type="number" #some5 id="some5" class="form-control" [(ngModel)]="cur_pack2.priceperyear" name="some5"  >
+										</div>
+									</div>
+									<div class="col-md-4 px-1">
+										<div class="form-group">
+											<label>Trial Duration</label>
+											<input type="text" #some6 id="some6" class="form-control" [(ngModel)]="cur_pack2.trialdur" name="some6"  >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Features</label><br>
+											<p>All Features Available (click)</p>
+												<div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: center">
+												<div class="row">
+													<div class="pr-1" *ngFor="let ceat of edfeatarr; index as i2">
+														<button  class="btn btn-primary btn-block"  style="color: white" (click)="addfeat3(ceat)">{{ceat.name}}</button>
+													</div>
+												</div>
+											</div>
+											<br>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+									<p>Selected Features For this Package (click)</p>
+											<div style="display: flex; flex-direction: row;justify-content: center; flex-wrap: wrap;">
+												<div class="row" align="center">
+													<div class="pr-1" *ngFor="let deat of dfeature; index as i3">
+														<button  class="btn btn-primary btn-block"  style="color: white" (click)="addfeat4(i3)">{{deat.name}}</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="editpackage()">Submit</button>
+											<button class="btn btn-neutral btn-sm" (click)="gobacktoedit2()">
+									go back?
+								</button>
+
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div *ngIf="crpackbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="card" background-color: #bdbdbd>
+						<div class="card-header">
+							<h5 class="title">Create Package</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-7 pr-1">
+										<div class="form-group">
+											<label>Name</label>
+											<input type="text" #some11 id="some11" class="form-control" [(ngModel)]="cur_pack.name" name="some11">
+										</div>
+									</div>
+									<div class="col-md-3 px-1">
+										<div class="form-group">
+											<label>Min Users</label>
+											<input type="text" #some21 id="some21" class="form-control" [(ngModel)]="cur_pack.minusers" name="some21">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-10 pr-1">
+										<div class="form-group">
+											<label>Description</label>
+											<input type="text" #some31 id="some31" class="form-control" [(ngModel)]="cur_pack.description" name="some31" >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 pr-1">
+										<div class="form-group">
+											<label>Price per month</label>
+											<input type="text" #some41 id="some41" class="form-control" [(ngModel)]="cur_pack.pricepermonth" name="some41" >
+										</div>
+									</div>
+									<div class="col-md-3 px-1">
+										<div class="form-group">
+											<label>Price per year</label>
+											<input type="text" #some51 id="some51" class="form-control" [(ngModel)]="cur_pack.priceperyear" name="some51"  >
+										</div>
+									</div>
+									<div class="col-md-4 px-1">
+										<div class="form-group">
+											<label>Trial Duration</label>
+											<input type="text" #some61 id="some61" class="form-control" [(ngModel)]="cur_pack.trialdur" name="some61"  >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Features</label><br>
+											<p>All Features Available(click)</p>
+												<div style="display: flex;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+												<div class="row">
+													<div class="pr-1" *ngFor="let ceat of crfeatarr; index as i2">
+														<button  class="btn btn-primary btn-block"  style="color: white" (click)="addfeat(ceat)">{{ceat.name}}</button>
+													</div>
+												</div>
+											</div>
+											<br>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+									<p>Selected Features For this Package(click)</p>
+											<div style="display: flex;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+												<div class="row" align="center">
+													<div class="pr-1" *ngFor="let deat of featureArray2; index as i3">
+														<button  class="btn btn-primary btn-block"  style="color: white" (click)="addfeat2(i3)">{{deat.name}}</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="addpackage({name: some11.value, Description: some31.value,min_users: some21.value,  price_per_month: some41.value, price_per_year: some51.value,  trial_dur:some61.value})">Submit</button>
+											<button class="btn btn-neutral btn-sm" (click)="gobacktocr()">
+									go back?
+								</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div style=" color: black">
+						<div class="card card-user">
+							<div class="image" style="background-color: #bdbdbd;height: 12vh;" align="center"><br><p style="font-size: 27px;color: black"> {{cur_pack.name}}</p>
+							</div>
+							<div class="card-body">
+								<div class="">
+									<p style="">
+										<span style="font-size: 2vw;"><b>${{cur_pack.pricepermonth}}</b></span> per month
+									</p>
+									<p style="">Min users: {{cur_pack.minusers}}</p>
+								</div>
+								<p class="description text-center">
+									{{cur_pack.description}}
+								</p>
+								<button class="btn btn-primary btn-block">
+									Try free for {{cur_pack.trialdur}} days
+								</button>Or <br>
+								<button href="#" class="btn btn-neutral btn-sm">
+									purchase Now
+								</button>
+								<div *ngFor="let feats of featureArray2">
+									<span style="color: orange; transform: scale(1.5);">✔</span> {{feats.name}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<div class="card-header">
+	<h4 class="card-title">List View Of Packages <span style="color: red; font-size: 15px">Standard features are unwritable</span></h4>
+</div>
+<div *ngIf="!this.data.editpackbool;" class="card-body">
+	<div class="table-responsive" style="min-height: 30vh">
+		<table class="table" >
+			<thead class=" text-primary">
+				<th>
+					Serial No.
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Description
+				</th>
+				<th>
+					Min Users
+				</th>
+				<th>
+					Price per month
+				</th>
+				<th>
+					Price per year
+				</th>
+				<th>
+					Trial Period
+				</th>
+
+				<th>
+					Features
+				</th>
+				<th >
+					Actions
+				</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let feat of this.packagearr; index as i2">
+					<td style="margin-left: 0.2vw">
+						{{i2 + 1}}
+					</td>
+					<td>
+						{{feat.name}}
+					</td>
+					<td>
+						{{feat.Description}}
+					</td>
+					<td>
+						{{feat.minusers}}
+					</td>
+					<td>
+						{{feat.pricepermonth}}
+					</td>
+					<td>
+						{{feat.priceperyear}}
+					</td>
+					<td>
+						{{feat.trialdur}}
+					</td>
+					<td>
+						<div class="container-fluid">
+							<div>
+								<div  ngbDropdown>
+									<a id="dropdownBasic1" ngbDropdownToggle>
+										<!--          <i class="now-ui-icons users_single-02"></i> -->
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a class="dropdown-item"  *ngFor="let feats of feat.features | filter">{{feats}}</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div style="display: flex;flex-direction: row; align-content: center;">
+							<div>
+								<a class="btn btn-primary" (click)="gobacktoedit(i2,feat.id, feat)" style="color: white">Edit</a>
+							</div>
+								<div style="margin-left: 2vw;">
+									<button class="btn btn-primary btn-block"  style="color: white" (click)="del(feat.id)">Delete</button>
+								</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="card-header" style="" >
+			<button class="btn btn-primary btn-block"  (click)="gobacktocr()" style="color: white" align="center"><h4 class="card-title">Create Package</h4></button>
+		</div>
+
+	</div>
+</div>
+
+

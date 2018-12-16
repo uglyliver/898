@@ -1,0 +1,71 @@
+<div style="width: 100%; height: 20vh;background-color: black" align="center">
+  <h2  style="padding-top:10vh;color: white" >SMTP Config</h2>
+</div>
+<div align="center" style="width: 100%;margin-top: 5vh">
+
+  <div class="col-md-6" align="center">
+    <div class="card" style="background-color: darkviolet">
+      <div class="card-header">
+        <h5 class="title" style="color: white">Enter Configs</h5>
+      </div>
+      <div class="card-body">
+        <form>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label style="color: white">Email</label>
+                  <input type="text" #em id="em" name="em" style="color: red" class="form-control" placeholder="XXX@XXX.xxx" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label style="color: white">Password</label>
+                  <input type="password" #pass id="pass" name="pass" class="form-control" placeholder="xxxxxxxxxx" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              
+          <div class="col-md-12 pl-1">
+            <div class="form-group">
+              <label style="color: white">SMTP Host</label>
+              <div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+                <div  ngbDropdown>
+                  <button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+                    Select
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <a class="dropdown-item" *ngFor="let sm of smtparr" (click)="set(sm)">{{sm}}</a>
+                  </div>
+                </div>
+                <div style="margin-left: 10px; margin-top: 5%" >
+                  <input type="text" disabled="" class="form-control" value="{{smtp}}">
+                </div></div>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                <button  class="btn btn-primary btn-block" (click)="set_smtp(em.value, pass.value, smtp)" style="color: white">Update</button>
+                </div>
+              </div>
+            </div>
+              <div class="row" align="center">
+              <div class="col-md-12 pr-1" align="center">
+                <div class="form-group" align="center">
+                <p style="color: #69f0ae; cursor: pointer;">
+                  <b>Current Configuration</b>
+                  <b>Email: </b>{{email}} <br><b>Password: </b>{{pass2}} <br><b>host: </b>{{host}}    
+                </p>
+              </div>
+              </div>
+            </div>
+        
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,224 @@
+<div class="panel-header panel-header-sm" id="top">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Set public holidays here</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card" >
+
+		<div class="card-header" >
+			<h3 class="card-title">Book a Holiday</h3>
+			<div class="table-responsive">
+
+				<h5 class="card-title">Your Holiday List</h5>
+				<table class="table">
+					<thead class=" text-primary">
+						<th>
+							Holiday Type Name
+						</th>
+						<th>
+							Holidays Left
+						</th>
+						<th>
+							Holidays Total
+						</th>
+					</thead>
+					<tbody>
+						<tr  *ngFor="let feat of this.h1 index as i" id="feat{{i}}" > <!-- -->
+							<td>
+								{{feat}}
+							</td>
+							<td>
+								{{h2[i]}}
+							</td>
+							<td>
+								{{h3[i]}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<h4 *ngIf="holibool" class="card-title">Holiday Requests (Submit Multiple days for approval at once)</h4>
+			<div *ngIf="holibool" class="table-responsive">
+				<h5 class="card-title">Your Holiday List</h5>
+				<table class="table">
+					<thead class=" text-primary">
+						<th>
+							Name
+						</th>
+						<th>
+							Date
+						</th>
+						<th>
+							No. Available
+						</th>
+						<th>
+							Type
+						</th>
+						<th>
+							Actions
+						</th>
+					</thead>
+					<tbody>
+						<tr  *ngFor="let feat of this.holidaylist index as i"  > <!-- -->
+							<td>
+								{{feat.name}}
+							</td>
+							<td>
+								{{feat.date}}
+							</td>
+							<td>
+								{{feat.days}}
+							</td>
+							<td>
+								{{feat.type}}
+							</td>
+							<td>
+								<button class="btn btn-primary btn-block" style="color: white"
+								(click)="delete_holi(i)">Delete</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button  class="btn btn-primary btn-block"  style="color: white" (click)="apply_holiday(holidaylist)">Apply</button>
+			</div>
+		</div>
+		<div *ngIf="Bookbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000000;  top: 10vh;">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: darkviolet" >
+						<div class="card-header" align="center">
+							<h5 class="title">Book Holiday</h5>
+						</div>
+						
+						<div  class="card-body" align="center">
+							<h6>List View of Currently Available Branch Holiday Types</h6>
+							<div class="table-responsive" style="min-height: 30vh">
+								<table class="table" >
+									<thead class=" text-primary">
+										<th>
+											Holiday Name
+										</th>
+										<th>
+											Number Available
+										</th>
+										<th>
+											Full/Half Day
+										</th>
+										<th>
+											Action
+										</th>
+									</thead>
+									<tbody>
+										<tr *ngFor="let feat of this.h1; index as i2">
+											<td style="margin-left: 0.2vw">
+												{{h1[i2]}}
+											</td>
+											<td >
+												{{h2[i2]}}
+											</td>
+											<td>							  				<div  ngbDropdown>
+												<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: #0288d1" ngbDropdownToggle>
+													Select Day
+												</button>
+												<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+													<a *ngFor="let feat of this.fullhalf; index as i" class="dropdown-item" (click)="sel2(feat,i)">{{feat}}</a>
+												</div>
+											</div>
+										</td>
+										<td>
+											<button class="btn btn-primary btn-block" style="color: white"
+											(click)="add({name:h1[i2], days: h2[i2], fullhalf: fullhalfval})">Add</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<button class="btn btn-neutral btn-sm" (click)="closesel()">go back?
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-body" *ngIf="!Bookbool;">
+		<div class="row">
+			<div class="col-md-12">
+				<p style="font-size: 18px;color: black"><b> Legend: </b></p>
+			</div>
+			<div class="col-md-3">
+				<p>Unapproved Holidays: <span class="week-date  enabled isholiday6 stripe-2"><span style="background-color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </span></p>
+			</div>
+			<div class="col-md-3">
+				<p>Approved Holidays: <span class="week-date enabled isholiday" style="background-color: green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </p>
+			</div>
+			<div class="col-md-3">
+				<p>Disapproved Holidays: <span class="week-date  enabled isholiday3"><span style="background-color: red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span> </p>
+			</div>
+			<div class="col-md-3">
+				<p>Public Holidays: <span style="color: red">RED<span>&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;</span> </p>
+			</div>
+			</div><br><br>
+			<div  style="display: flex;flex-direction: row;flex-flow: wrap;">
+				<div class="calendar" *ngFor="let month of fmontharray; index as i"><div class="calendar-navs">
+					<div  align="center">
+						<span class="p4">{{ info[i][0] }}</span>
+					</div>
+					<div align="center">
+						<span class="p4">{{ info[i][1] }}</span>
+					</div>
+				</div>
+				<div class="month-grid">
+					<div class="day-names">
+						<div *ngFor="let name of dayNames" class="day-name p9">
+							{{ name }}
+						</div>
+					</div>
+					<div class="weeks">
+						<div *ngFor="let week of month" class="week">
+							<ng-container *ngFor="let day of week" class="module">
+								<ng-container *ngIf="day.future">
+									<div class="week-date disabled"
+									*ngIf="(!(day.isunapproved) && !(day.isbooked))  &&  ((!issame(day.mDate,i) && (!(day.isbooked) && !unapproved(day.mDate))))">
+									<span class="date-text">{{ day.mDate.date() }}</span>
+								</div>
+								<div class="week-date disabled2 "
+								*ngIf="(!(day.isunapproved) && !(day.isbooked))  &&  (((islesser(day.mDate,i) || ishigher(day.mDate,i) || !notwork(day.mDate,i)) && issame(day.mDate,i)))">
+								<span class="date-text">{{ day.mDate.date() }}</span>
+							</div>
+							<div  class="week-date enabled"
+							*ngIf="(!(day.isunapproved) && !(day.isbooked))  &&  ((!(day.isholiday) && (issame(day.mDate,i) && (!islesser(day.mDate,i) && !ishigher(day.mDate,i) && notwork(day.mDate,i) ))))"
+							(click)="selectDate(day,i)">
+							<span class="date-text">{{ day.mDate.date() }}</span>
+						</div>
+						<div [attr.data-hover]="day.holidayname" class="week-date  disabled2 disabled3 "
+						*ngIf="(!(day.isunapproved) && !(day.isbooked))  && (((day.isholiday) &&issame(day.mDate,i) && (!islesser(day.mDate,i) && !ishigher(day.mDate,i) && notwork(day.mDate,i))))">
+						<span class="date-text">{{ day.mDate.date() }}</span>
+					</div>
+					<div  class="week-date  enabled isholiday"
+					*ngIf="(false) || ((day.isbooked=='1' ) && issame(day.mDate,i))">
+					<span class="date-text">{{ day.mDate.date() }}</span>
+				</div>
+				<div  class="week-date  enabled isholiday3"
+				*ngIf="(false) || ((day.isbooked=='2' ) && issame(day.mDate,i))">
+				<span class="date-text">{{ day.mDate.date() }}</span>
+			</div>
+			<div  class="week-date enabled isholiday6 stripe-2 "
+			*ngIf="(false) || ((day.isunapproved) && issame(day.mDate,i))">
+			<span class="date-text">{{ day.mDate.date() }}</span>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="!day.future">
+		<div class="week-date disabled2">
+			<span class="date-text">{{ day.mDate.date() }}</span>
+		</div>
+	</ng-container>
+</ng-container>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+

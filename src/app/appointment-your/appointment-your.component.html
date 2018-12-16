@@ -1,0 +1,37 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Your Appointments</h6>
+</div>
+<!-- <button class="btn btn-danger" (click)="loadevents()">Load Events</button>
+<button class="btn btn-danger" (click)="loadevents2()">Load Events2</button> -->
+<button class="btn btn-danger" (click)="loadevents3()">Load Events3</button>
+<button class="btn btn-danger" (click)="loadevents4()">Load Events4</button>
+<!-- 
+<form>
+	<div class="row">
+		<div class="col-md-6 pr-1">
+			<div class="form-group">
+				<label style="color: black">Title</label>
+				<input type="text" #some1 id="some1" placeholder="Interview" class="form-control"  name="some1">
+			</div>
+		</div>
+		<div class="col-md-6 pr-1">
+			<div class="form-group">
+				<label style="color: black">Date</label>
+				<input type="text" #some2 id="some2" placeholder="2018-12-16" class="form-control"  name="some2">
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label style="color: black"></label>
+				<button  class="btn btn-primary btn-block"  style="color: white" (click)="push_event(some1.value)">Submit</button>
+			</div>
+		</div>
+	</div>
+</form> -->
+<!-- <p>Title:  {{displayEvent | json}}</p> -->
+<!-- <ng-container *ngIf="displayEvent.event != undefined && displayEvent != undefined">
+<p>Title: {{displayEvent.event.title}} From: {{displayEvent.event.start | slice:0:10}} To:{{displayEvent.event.end}} </p></ng-container> -->
+<div *ngIf="calendarOptions" style="background-color: white">
+    <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+        (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+</div>

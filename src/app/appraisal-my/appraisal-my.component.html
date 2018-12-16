@@ -1,0 +1,271 @@
+<!--  add attachments and give description for each objective before end of appraisal period -->
+<!--  set appraisal period and add objectives that apply to all employees-->
+
+<div class="panel-header panel-header-sm" id="top">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Describe Your Objectives here</h6>
+</div>
+<div  class="col-md-12" id="top" style="background-color: white">
+	
+	<div  class="card-body" *ngIf="finbool">
+	<h5>Select a Financial Year</h5>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Year Name
+					</th>
+					<th>
+						Start Date
+					</th>
+					<th>
+						End Date
+					</th><th>Actions</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.finarr; index as i2">
+						
+						<td>
+							{{feat.yearname}}
+						</td>
+						<td>
+							{{feat.sdate | slice:0:10}}
+						</td>
+						<td>
+							{{feat.edate | slice:0:10}}
+						</td>
+						<td *ngIf="feat.sdate >= data.sdate">
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="select_year(feat.sdate, feat.id)">Select</button>
+						</td>
+						<td *ngIf="feat.sdate < data.sdate">
+							<button class="btn btn-primary btn-block" (click)="select_year(feat.sdate, feat.id)" style="color: white">Select</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="card" *ngIf="!finbool">
+			<div class="card-header">
+				<h4 class="card-title">Select an Appraisal Period</h4>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table">
+						<thead class=" text-primary">
+							<th>
+								Period
+							</th>
+							<th>
+								Describe Objectives
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.apparr; index as i2" >
+								<td class="btn btn-outline btn-block">
+								<p style="display:inline" >	{{feat.sdate}} <b>To</b> {{feat.edate}}</p>
+								</td>
+
+								<td *ngIf="today <= feat.edate">
+								<ul uk-accordion style="display: flex;flex-direction: column;">
+								<ng-container *ngFor="let feat2 of feat.obj; index as i3">
+
+								<ng-container *ngIf="this.emparr.id == feat2.eid">
+								<span>
+								<a (click)="set(feat2.id, feat.id)" class="uk-accordion-title" href="#" style="font-size: 15px"><b>Objective:</b>&nbsp; <i>{{feat2.description}}</i> <br> <br><br></a>
+								<div class="uk-accordion-content">
+										<ng-container>
+											<ng-container>
+												<form>
+								<div class="row">
+
+								<ng-container *ngIf="((feat2.temp != null) && (feat2.temp !=undefined)); else elsepart">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: black">Your Description of Work done towards this objective
+											</label>
+												
+											<textarea [value]="feat2.temp.objectivesDescription" style="border-style: solid;border-width: 5px;border-style: dotted;" type="text" #some1 id="some1" class="form-control"  name="some1"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: blue" >{{desc_str}}</label>
+										<button  class="btn btn-primary" style="color: white" (click)="submit_desc(feat2.id, feat.id, some1.value)">Update</button>
+										</div>
+									</div>
+	</ng-container>
+
+		<ng-container *ngIf="((feat2.temp == null) || (feat2.temp ==undefined));">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: black">Your Description of Work done towards this objective
+											</label>
+											<textarea style="border-style: solid;border-width: 5px;border-style: dotted;" type="text" #some2 id="some2" class="form-control"  name="some2"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+										<button  class="btn btn-primary" style="color: white" (click)="submit_desc(feat2.id, feat.id, some2.value)">Update</button>
+										</div>
+									</div>
+						</ng-container>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: black">Upload Attachments
+											</label>
+												<angular-file-uploader  style="color: white"
+												[config]="afuConfig"
+												[resetUpload]=resetVar
+												(ApiResponse)="DocUpload($event)">
+											</angular-file-uploader>
+										</div>
+									</div>
+								</div>		
+							</form>
+							<span class="">
+								<div >
+									<div class="table-responsive" style="min-height: 30vh">
+										<p style="font-size: 15px"><b>Attachments</b></p>
+										<table class="table" >
+											<thead class=" text-primary">
+												<th>
+													File name 
+												</th>
+												<th>
+													Action
+												</th>
+											</thead>
+											<tbody>
+												<ng-container *ngIf="(feat2.temp != null) || (feat2.temp != undefined)">
+													<ng-container *ngIf="(feat2.temp.files != null) || (feat2.temp.files != undefined)">
+												<tr *ngFor="let file of feat2.temp.files">
+													<td>
+														<p>{{file.file}}</p>
+													</td>
+													<td>
+														<a target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+													</td>
+												</tr>
+											</ng-container>
+												</ng-container>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</span>
+						</ng-container>
+					</ng-container>
+			</div>	</span>
+	</ng-container>
+
+<!-- 	<ng-container *ngIf="today > feat2.deadline">
+	<ng-container *ngIf="((feat2.temp == null) || (feat2.temp ==undefined));">
+							<span>
+							<a (click)="set(i3, feat.id)" class="uk-accordion-title" href="#" style="font-size: 15px; color: black"><b>Objective:</b>&nbsp; <i>{{feat2.description}}</i> <br> <b>Deadline:</b> <i> {{feat2.deadline}}</i> <br><br></a>
+							<div class="uk-accordion-content">
+									<p><b>Your Auto-Submitted Description:</b>  You didn't Submit anything. </p>
+								</div>
+						</span>
+	</ng-container>
+
+	<ng-container *ngIf="((feat2.temp != null) && (feat2.temp != undefined));">
+							<span>
+							<a (click)="set(i3, feat.id)" class="uk-accordion-title" href="#" style="font-size: 15px; color: black"><b>Objective:</b>&nbsp; <i>{{feat2.description}}</i> <br> <b>Deadline:</b> <i> {{feat2.deadline}}</i> <br><br></a>
+							<div class="uk-accordion-content">
+									<p><b>Your Auto-Submitted Description:</b>{{feat2.temp.objectivesDescription}} </p>
+								</div>
+						</span>
+					</ng-container>	
+</ng-container> -->
+</ng-container>
+	</ul>	
+</td>
+	<td *ngIf="today > feat.edate">
+								<ul uk-accordion style="display: flex;flex-direction: column;">
+								<ng-container *ngFor="let feat2 of feat.obj; index as i3">
+
+								<ng-container *ngIf="this.emparr.id == feat2.eid">
+								<span>
+								<a (click)="set(feat2.id, feat.id)" class="uk-accordion-title" href="#" style="font-size: 15px"><b>Objective:</b>&nbsp; <i>{{feat2.description}}</i> <br> <br><br></a>
+								<div class="uk-accordion-content">
+										<ng-container>
+											<ng-container>
+												<form>
+								<div class="row">
+
+								<ng-container *ngIf="((feat2.temp != null) && (feat2.temp !=undefined)); else elsepart">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: black">Your Description of Work done towards this objective:
+											</label>
+											<p>{{feat2.temp.objectivesDescription}}</p>
+										</div>
+									</div>
+	</ng-container>
+
+		<ng-container *ngIf="((feat2.temp == null) || (feat2.temp ==undefined));">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: black">Your Description of Work done towards this objective
+											</label>
+											<p>You didn't describe your progress.</p>
+										</div>
+									</div>
+						</ng-container>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											
+										</div>
+									</div>
+								</div>		
+							</form>
+							<span class="">
+								<div >
+									<div class="table-responsive" style="min-height: 30vh">
+										<p style="font-size: 15px"><b>Attachments</b></p>
+										<table class="table" >
+											<thead class=" text-primary">
+												<th>
+													File name 
+												</th>
+												<th>
+													Action
+												</th>
+											</thead>
+											<tbody>
+												<ng-container *ngIf="(feat2.temp != null) || (feat2.temp != undefined)">
+													<ng-container *ngIf="(feat2.temp.files != null) || (feat2.temp.files != undefined)">
+												<tr *ngFor="let file of feat2.temp.files">
+													<td>
+														<p>{{file.file}}</p>
+													</td>
+													<td>
+														<a target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+													</td>
+												</tr>
+											</ng-container>
+												</ng-container>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</span>
+						</ng-container>
+					</ng-container>
+			</div>	</span>
+	</ng-container>
+</ng-container>
+	</ul>	
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+

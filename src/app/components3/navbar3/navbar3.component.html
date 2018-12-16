@@ -1,0 +1,66 @@
+
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+
+            <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div>
+            <a class="navbar-brand">{{data.displaynow}}</a>
+        </div>
+        <button class="navbar-toggler" type="button" (click)="collapse()"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed" style="">
+          <div class="row" style="margin-left: 12px; margin-right: 12px">
+            <div>
+              
+          <div  ngbDropdown *ngIf="(type == 'manager')">
+    <button id="dropdownConfig2" class="btn btn-outline-primary" (click)="data.run_zero()" style="background-color: #ff1744 " ngbDropdownToggle>
+      Notification
+    </button>
+    <div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="background-color: white">
+      <a class="dropdown-item">{{data.holiday}} new Holiday Requests.</a>
+      <a class="dropdown-item" >{{data.overtime}} new overtime Requests.</a>
+      <a class="dropdown-item" >{{data.appraisal}} new appraisal Requests.</a>
+      <a class="dropdown-item" >{{data.grievances}} new grievances.</a>
+      <a class="dropdown-item" >{{data.reports}} new weekly reports.</a>
+      <a class="dropdown-item" >{{data.trip}} new business trip Requests.</a>
+        </div>
+      </div>
+            </div>
+          </div>
+          <form>
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Search...">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="now-ui-icons ui-1_zoom-bold"></i>
+                </div>
+              </div>
+            </div>
+          </form>
+          
+          <ul class="navbar-nav">
+            <li class="nav-item" ngbDropdown>
+              <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                <i class="now-ui-icons users_single-02"></i>
+                <p>
+                  <span class="d-lg-none d-md-block">Branch</span>
+                </p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a class="dropdown-item" (click)="this.data.brlogout()">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </div>
+</nav>

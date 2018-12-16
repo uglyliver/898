@@ -1,0 +1,63 @@
+<div style="width: 100%; height: 20vh;background-color: black" align="center">
+  <h2  style="padding-top:10vh;color: white" >Paypal Config</h2>
+</div>
+<div align="center" style="width: 100%;margin-top: 5vh">
+
+  <div class="col-md-6" align="center">
+    <div class="card" style="background-color: darkviolet">
+      <div class="card-header">
+        <h5 class="title" style="color: white">Enter Configs</h5>
+      </div>
+      <div class="card-body" align="center">
+        <form align="center">
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label style="color: white">Auth Token</label>
+                <input style="color: red" type="text" id="paypal" #paypal name="paypal" class="form-control" placeholder="XXXX1234XXXX"> 
+              </div>
+            </div></div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label style="color: white">User Name</label>
+                  <input type="text" name="n" #n id="n" style="color: red" class="form-control" placeholder="John Doe">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label style="color: white">Password</label>
+                  <input type="password" id="p" name="p" #p class="form-control" placeholder="xxxxxxxx">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                <button  class="btn btn-primary btn-block" (click)="paypal2(paypal.value, n.value, p.value)" style="color: white" >Update</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group"><br><br>
+                </div>
+              </div>
+            </div>
+            <div class="row" align="center">
+              <div class="col-md-12 pr-1" align="center">
+                <div class="form-group" align="center">
+                <p style="color: #69f0ae; cursor: pointer;">
+                  <b>Current Configuration</b>
+                  <b>Auth Token: </b>{{auth}} <br><b>Email: </b>{{email}} <br><b>Password: </b>{{pass}}    
+                </p>
+              </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

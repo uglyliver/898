@@ -1,0 +1,255 @@
+<!--  set appraisal period and add objectives that apply to all employees-->
+
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Create Appraisal Periods here</h6>
+</div>
+<div  class="col-md-12" id="top" style="background-color: white">
+	<div  *ngIf="objbool">
+		<div class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: white; background-color: darkviolet" >
+					<div class="card-body">
+						<div class="card-header">
+      <h4 class="card-title">Create Objectives</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th >
+              Description
+            </th>
+            <th>
+             Add
+           </th>
+         </thead>
+         <tbody>
+          <tr>
+          	<td>
+              <textarea type="text" #desc id="desc" name="desc" class="form-control" ></textarea>
+          	</td>
+             <td>
+              <div style="display: flex;flex-direction: row; align-content: center;">
+              <button class="btn btn-primary btn-block" (click)="add_obj(desc.value,desc.value)">Add &nbsp;<i class="now-ui-icons ui-1_check" style="transform: scale(1.5);"></i></button>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+			<div class="card-header">
+				<h4 class="card-title">List View Of Objectives of this Period</h4>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Description
+							</th>
+							<th>
+								Action
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.objarr11; index as i2">
+								<ng-container *ngIf="feat.eid == eid">
+								<td>
+									{{i2 + 1}}
+								</td>
+								<td>
+									{{feat.description}}
+								</td>
+								<td>
+						<button class="btn btn-primary btn-block" style="color: white"
+					(click)="delete_obj(feat.id)">Delete</button>
+								</td>
+								</ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+					<button class="btn btn-primary btn-block" style="color: white"
+					(click)="close_obj()">go Back?</button>
+			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div  *ngIf="empbool">
+		<div class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: darkviolet" >
+						<div class="card-body">
+
+			
+			<div class="card-header">
+				<div class="col-md-12">
+				<h4 class="card-title">List View Of Employees</h4>
+				</div>
+				<div class="col-md-12">
+					<label style="color: white">Search Employee</label>
+					<input style="color: white" type="text" #sync [(ngModel)]="emp_sync" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+				</div>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Name
+							</th>
+							<th>
+								Email
+							</th>
+							
+							<th>
+								Salary
+							</th>
+							<th>
+								type
+							</th>
+							<th>
+								role
+							</th>
+							<th>
+								Objectives
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.brancharray; index as i2">
+								<ng-container *ngIf="feat.name.startsWith(emp_sync)">
+								<td style="margin-left: 0.2vw">
+									{{i2 + 1}}
+								</td>
+								<td>
+									{{feat.name}}
+								</td>
+								<td>
+									{{feat.email}}
+								</td>
+								<td>
+									{{feat.salary}}
+								</td>
+								<td>
+									{{feat.type}}
+								</td>
+								<td>
+									{{feat.role}}
+								</td>
+								<td>
+									<div>
+										<button  class="btn btn-primary" style="background-color: orange" (click)="open_obj(feat.id)" >
+											Add
+										</button>
+									</div>
+								</td>
+							</ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div  class="card-body" *ngIf="finbool">
+	<h5>Select a Financial Year</h5>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Year Name
+					</th>
+					<th>
+						Start Date
+					</th>
+					<th>
+						End Date
+					</th><th>Actions</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.finarr; index as i2">
+						
+						<td>
+							{{feat.yearname}}
+						</td>
+						<td>
+							{{feat.sdate | slice:0:10}}
+						</td>
+						<td>
+							{{feat.edate | slice:0:10}}
+						</td>
+						<td *ngIf="feat.sdate >= data.sdate">
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="select_year(feat.sdate, feat.id)">Select</button>
+						</td>
+						<td *ngIf="feat.sdate < data.sdate">
+							<button class="btn btn-primary btn-block" disabled="" style="color: white">Select</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card" *ngIf="!finbool">
+			<div class="card-header">
+				<h4 class="card-title">List View Of Appraisal Periods</h4>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Start Date
+							</th>
+							<th>
+								End Date
+							</th>
+							<th>
+								Objectives
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.apparr; index as i2">
+								<td>
+									{{i2 + 1}}
+								</td>
+								<td>
+									{{feat.sdate}}
+								</td>
+								<td>
+									{{feat.edate}}
+								</td>
+								<td>
+						<button class="btn btn-primary btn-block" style="color: white"
+					(click)="open_emp(feat.id, i2)">Add</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</div>
+
+

@@ -1,0 +1,370 @@
+<div style="background-color: black; height: auto; "><div style="min-width: 2000000px; min-height: 2000000px; background-color: #8A0707 ;position: absolute;z-index: 100000; overflow: scroll;" *ngIf="this.result =='result'"></div>
+
+
+<div style="overflow-x: hidden; background-color: teal;height: auto">
+	
+	<div  *ngIf="this.data.tryfreebool;" style="position: absolute;z-index: 10; width: 80%;min-height: 70vh; background-color: white;margin-left:10%;margin-right:10%;margin-top:10vh" align="center">
+
+		<div class="card-body">
+			<form>
+				<div class="row">
+					<div class="col-md-12"><div style="float: left; width: 100%" ><h4 align="center">Register For your <span style="color: orange">{{this.curtrialdur}}</span> days Free Trial</h4></div></div>
+					<br>
+				</div>
+				<div class="row">
+					<div class="col-md-5 pr-1">
+						<div class="form-group">
+							<label>Country Name</label>
+							<input type="text" class="form-control" id="cou" #cou name="cou"  placeholder="Country name" >
+						</div>
+					</div>
+					<div class="col-md-3 px-1">
+						<div class="form-group">
+							<label>Entity Name</label>
+							<input type="text" name="nm" id="nm" #nm class="form-control" placeholder="Microtech systems">
+						</div>
+					</div>
+					<div class="col-md-4 pl-1">
+						<div class="form-group">  <!-- style="color: magenta" -->
+							<label>Phone Number</label>
+							<input type="text" id="pn" #pn name="pn" class="form-control" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label>Registration Number</label>
+							<input type="text" #reg id="reg" name="reg" class="form-control" placeholder="AN356465">
+						</div>
+					</div>
+					<div class="col-md-6 pl-1">
+						<div class="form-group">
+							<label>Owner Email id <span style="color: red">{{email2}}</span></label>
+							<input type="email" [(ngModel)]="emailvar" #email id="email" name="email" class="form-control" placeholder="email">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Enter Address</label>
+							<input type="text" #add id="add" name="add" class="form-control" placeholder="Address" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Enter Funding Name</label>
+							<input type="text" #fn id="fn" name="fn" class="form-control" placeholder="funding name" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 pr-1">
+						<div class="form-group">
+							<label>Password <span style="color: red">{{pass}}</span></label>
+							<input type="password" #password id="password" [(ngModel)]="pas1" name="password" class="form-control" placeholder="xxxxxx" >
+						</div>
+					</div>
+					<div class="col-md-4 px-1">
+						<div class="form-group">
+							<label>Confirm Password <span style="color: red">{{pass2}}</span></label>
+							<input type="password"  #password2 id="password2" [(ngModel)]="pas2" name="password2" class="form-control" placeholder="xxxxxx" >
+						</div>
+					</div>
+					<div class="col-md-4 pl-1">
+						<div class="form-group">
+							<label>Min user Count</label>
+							<input type="number" id="mu" #mu name="mu" class="form-control" placeholder="min users">
+						</div>
+					</div>
+				</div>
+				<div class="row" align="center">
+
+					<div class="col-md-4 pl-1">
+						<div class="form-group">
+							<label>Company Size</label>
+							<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+								<div  ngbDropdown>
+									<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+										Select
+									</button>
+									<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a class="dropdown-item" (click)="selcomsz('1-10')">1-10</a>
+										<a class="dropdown-item" (click)="selcomsz('11-50')">11-50</a>
+										<a class="dropdown-item" (click)="selcomsz('51-100')">51-100</a>
+										<a class="dropdown-item" (click)="selcomsz('101-1000')">101-1000</a>
+										<a class="dropdown-item" (click)="selcomsz('1000+')">1000+</a>
+									</div>
+								</div>
+								<div style="margin-left: 10px; margin-top: 5%" >
+									<input type="text" disabled="" class="form-control" value="{{selcomszval}}">
+								</div></div>
+							</div>
+						</div>
+						<div class="col-md-4 pl-1" align="center">
+
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<div class="row" style="padding-top: 30px;" align="center">
+							<input type="checkbox" [(ngModel)]="termsacc" name="check2" #check2 id="check2" >
+							<a href="./terms-conditions" style="cursor: pointer;">Accept terms and conditions</a>
+							</div>
+						</div>
+						<div class="col-md-4 pl-1 " style="margin-top: 2%">
+							
+							<p style="">{{mssg}}</p>
+							<ng-container *ngIf="termsacc == true"><button class="btn btn-primary btn-block" (click)="reg2({address: add.value, name: nm.value,email: email.value,password:password.value,countryName:cou.value,phone:pn.value,registration:reg.value,fundingName: fn.value, minUser:mu.value,size:selcomszval, packid: packid, pass2:password2.value})">Register</button></ng-container>
+							<ng-container *ngIf="termsacc != true"><button class="btn btn-primary btn-block" disabled="">Register</button></ng-container>
+							 Or
+							<button (click)="close_try()" class="btn btn-neutral btn-sm">
+								Go back?
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div  *ngIf="termbool" style="position: absolute;z-index: 10; width: 80%;min-height: 70vh; background-color: white;margin-left:10%;margin-right:10%;margin-top:10vh" align="center">
+		<div class="card-body">
+			<button (click)="openterm()" class="btn btn-neutral btn-sm">Go back?</button>
+		</div>
+		</div>
+
+		<div  *ngIf="this.purchasebool;" style="position: absolute;z-index: 10; width: 80%;min-height: 70vh; background-color: white;margin-left:10%;margin-right:10%;margin-top:10vh" align="center">
+		<div class="card-body">
+			<form>
+				<div class="row">
+					<div class="col-md-12"><div style="float: left; width: 100%" ><h4 align="center">Purchase This Pack</h4></div></div>
+					<br>
+				</div>
+				<div class="row">
+					<div class="col-md-5 pr-1">
+						<div class="form-group">
+							<label>Country Name</label>
+							<input #cou name="cou" id="cou" type="text" class="form-control"  placeholder="Country name" value="">
+						</div>
+					</div>
+					<div class="col-md-3 px-1">
+						<div class="form-group">
+							<label>Entity Name</label>
+							<input name="name" #name id="name" type="text" class="form-control" placeholder="Microtech systems">
+						</div>
+					</div>
+					<div class="col-md-4 pl-1">
+						<div class="form-group">  <!-- style="color: magenta" -->
+							<label for="exampleInputEmail1">Phone Number</label>
+							<input name="pn" id="pn" #pn type="text" class="form-control" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label>Registration Number</label>
+							<input type="text" #reg name="reg" id="reg" class="form-control" placeholder="AN356465">
+						</div>
+					</div>
+					<div class="col-md-6 pl-1">
+						<div class="form-group">
+					<!-- 		<label>Owner Email id<span style="color: red">{{pass}}</span></label> -->
+							<label>Owner Email id <span style="color: red">{{email2}}</span></label>
+							<input type="email" [(ngModel)]="emailvar" #email id="email" name="email" class="form-control" placeholder="email" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Enter Address</label>
+							<input type="text" #add id="add" name="add" class="form-control" placeholder="Address" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Enter Funding Name</label>
+							<input type="text" #fn id="fn" name="fn" class="form-control" placeholder="funding name" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 pr-1">
+						<div class="form-group">
+							<label>Password <span style="color: red">{{pass}}</span></label>
+							<input type="password" [(ngModel)]="pas1" name="pass1" #password id="password" class="form-control" placeholder="xxxxxx">
+						</div>
+					</div>
+					<div class="col-md-4 px-1">
+						<div class="form-group">
+							<label>Confirm Password <span style="color: red">{{pass2}}</span></label>
+							<input type="password" [(ngModel)]="pas2" name="pass2" class="form-control" placeholder="xxxxxx" >
+						</div>
+					</div>
+					<div class="col-md-4 pl-1">
+						<div class="form-group">
+							<label>Min user Count</label>
+							<input type="number" id="mu" #mu name="mu" class="form-control" placeholder="min users">
+						</div>
+					</div>
+				</div>
+				<div class="row" align="center">
+
+					<div class="col-md-4 pl-1">
+						<div class="form-group">
+							<label>Company Size</label>
+							<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+								<div  ngbDropdown>
+									<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+										Select
+									</button>
+									<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a class="dropdown-item" (click)="selcomsz('1-10')">1-10</a>
+										<a class="dropdown-item" (click)="selcomsz('11-50')">11-50</a>
+										<a class="dropdown-item" (click)="selcomsz('51-100')">51-100</a>
+										<a class="dropdown-item" (click)="selcomsz('101-1000')">101-1000</a>
+										<a class="dropdown-item" (click)="selcomsz('1000+')">1000+</a>
+									</div>
+								</div>
+								<div style="margin-left: 10px; margin-top: 5%" >
+									<input type="text" disabled="" class="form-control" value="{{selcomszval}}">
+								</div></div>
+							</div>
+						</div>
+						<div class="col-md-4 pl-1" align="center">
+							<div style="font-size: 12px;">Make Payment to enable Register(reload page if not present)</div>
+							<h2 *ngIf="paypalLoad" style="font-size: 12px;">Paypal button is loading</h2>
+							<div id="paypal-checkout-btn"></div>
+
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: red"> </p>
+							<p style="color: ; transform: scale(1);">{{mssg}}</p>
+						</div>
+						<div class="col-md-4 pl-1 " style="margin-top: 2%">
+							<div class="row">
+							<input type="checkbox" [(ngModel)]="termsacc" name="check2" #check2 id="check2" >
+							<a href="./terms-conditions" style="cursor: pointer;">Accept terms and conditions</a>
+							</div>
+							<ng-container *ngIf="purbool">
+							<button class="btn btn-primary btn-block" (click)="reg({address: add.value, name: nm.value,email: email.value,password:password.value,countryName:cou.value,phone:pn.value,registration:reg.value,fundingName: fn.value, minUser:mu.value,size:selcomszval, packid: packid})">Register</button></ng-container>
+							<ng-container *ngIf="!purbool">
+							<button class="btn btn-primary btn-block" disabled="
+							">Register</button></ng-container> Or
+							<a href="./" class="btn btn-neutral btn-sm">
+								Go back?
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="rflx" style="min-height: 
+		100vh;overflow-x: hidden;min-width: 100vw; max-width: 100vw">
+		<div id="desktop" style="background-color: #151922;width: 30vw;">
+			<p style="color: white; margin-top: 30vh;font-family: 'Montserrat', sans-serif;margin-left: 5vh;font-size: 1vw;"><span style="font-size: 4vw;">Welcome</span><br> &nbsp; to Employee Management App.</p><br><br><br><br>
+			<p style="color: white;font-family: 'Montserrat', sans-serif;margin-left: 5vh;font-size: 1.1vw;">&nbsp;	    Securely connect, sync, and collaborate<br>&nbsp;
+				Designed to take teamwork to the next level <br>&nbsp;
+				Space for sharing and collaboration <br>&nbsp;
+				Advanced security features <br>&nbsp;
+				Dedicated live support <br>&nbsp;
+				Get all the features your business needs<br>&nbsp;
+			</div>
+			<div class="cflx">
+				<div style="color: white; min-width: 70vw;max-width: 100vw; max-height: 10vh; background-color: teal; display: flex;flex-direction: row;align-items: center;">
+					<div style="margin-left: 4vw">
+						<p style=" margin-top: 0vh;font-family: 'Montserrat', sans-serif;margin: 1vw;"><span style="font-size: 25px;">Login</span></p></div>
+						<div class="uk-margin" style=" display: flex;margin-top:1vw;flex-direction: row;justify-content: space-around;align-content: space-around;">
+							<div ngbDropdown style=" z-index: +100;">
+								<button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" ngbDropdownToggle style="color: white">
+									<i class="now-ui-icons arrows-1_minimal-down" style="color: white;"></i>
+								</button>
+								<div ngbDropdownMenu class="dropdown-menu-left">
+									<a class="dropdown-item text-danger"  href="login">Root Admin</a>
+									<a class="dropdown-item" href="entity/login">Corporate Entity</a>
+									<a class="dropdown-item" href="branch/login">Branch</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  style="background-color: #37474f;color: white; min-width: 70vw;max-width: 100vw min-height: 
+					89.6vh; position: relative;z-index: 0"><div style="margin-left: 4vw">
+						<p style="color: white; margin-top: 0vh;font-family: 'Montserrat', sans-serif;margin: 15px;">Or, <br><span style="font-size: 25px;">Register</span> <br>By Choosing a Plan</p>
+					</div>
+					<div  style="width: 70vw; min-height: 75vh;display: flex;flex-direction: row; justify-content: space-between;float: left;" align="center">
+
+						<div  id="desktop"  style="width: 85%;margin-left: 6%; margin-right: 6% ">
+							<div class="desksc" style="" align="center" >
+								<div *ngFor="let feat of this.packall; index as i">
+									<div class="" style="width: 90%; color: black" >
+										<div class="card card-user">
+											<div class="image" style="background-color: #bdbdbd;height: 12vh;" align="center"><br><p style="font-size: 27px;color: black"> {{feat.name}} </p>
+											</div>
+											<div class="card-body">
+												<div class="">
+													<p style="">
+														<span style="font-size: 2vw;"><b>${{feat.pricepermonth}}</b></span> per month
+													</p>
+													<p style="">Min users: {{feat.minusers}}</p>
+												</div>
+												<p class="description text-center">
+													{{feat.description}}
+												</p>
+												<button class="btn btn-primary btn-block" (click)="switch_trybool({trialdur: feat.trialdur},feat.features, feat.id)">
+													Try free for {{feat.trialdur}} days
+												</button>Or <br>
+												<button  class="btn btn-neutral btn-sm"  (click)="open_purchase(feat.pricepermonth,feat.features,feat.id)">
+													purchase Now
+												</button>
+												<div *ngFor="let feats of feat.features | splite">
+													<span style="color: orange; transform: scale(1.5);">✔</span> {{feats}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="mobile"  style="width: 80vw;margin-left: 9vw" >
+							<div class="mobsc" style=" " align="center">
+								<div *ngFor="let feat of this.packall">
+									<div class="" style="width: 90%; color: black">
+										<div class="card card-user">
+											<div class="image" style="background-color: #bdbdbd;height: 12vh;" align="center"><br><p style="font-size: 27px;color: black"> {{feat.name}} </p>
+											</div>
+											<div class="card-body">
+												<div class="">
+													<p style="">
+														<span style="font-size: 30px;"><b>${{feat.pricepermonth}}</b></span> per month
+													</p>
+													<p style="">Min users: {{feat.minusers}}</p>
+												</div>
+												<p class="description text-center">
+													{{feat.Description}}
+												</p>
+												<button class="btn btn-primary btn-block" (click)="switch_trybool({trialdur: feat.trialdur},feat.features, feat.id)">
+													Try free for {{feat.trialdur}} days
+												</button>Or <br>
+												<button class="btn btn-neutral btn-sm"  (click)="open_purchase(feat.pricepermonth, feat.features, feat.id)">
+													purchase Now
+												</button>
+												<div *ngFor="let feats of feat.Features">
+													<span style="color: orange; transform: scale(1.5);">✔</span> {{feats}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div></div>

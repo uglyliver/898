@@ -1,0 +1,80 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete Entities here</h6>
+</div>
+
+<div style="background-color: white" class="card-header">
+	<div >
+	<h4 class="card-title">List View Of Employees</h4>
+</div></div>
+<div class="card-body" style="background-color: white">
+	<div class="table-responsive" style="min-height: 30vh">
+		<table class="table" >
+			<thead class=" text-primary">
+				<th>
+					ID
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Email
+				</th>
+				<th>
+					Registration Number
+				</th>
+				<th>
+					Country Name
+				</th>
+				<th>
+					Funding Name
+				</th>
+				<th>
+					Minimum Users
+				</th>
+				<th>
+					Phone
+				</th>
+				<th>
+					Size
+				</th>
+				<th>
+					Join Date
+				</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let feat of this.entarr; index as i2">
+					<td style="margin-left: 0.2vw">
+						{{feat.id}}
+					</td>
+					<td>
+						{{feat.name}}
+					</td>
+					<td>
+						{{feat.email}}
+					</td>
+					<td>
+						{{feat.registration}}
+					</td>
+					<td>
+						{{feat.countryName}}
+					</td>
+					<td>
+						{{feat.fundingName}}
+					</td>
+					<td>
+						{{feat.minUser}}
+					</td>
+					<td>
+						{{feat.phone}}
+					</td>
+					<td>
+						{{feat.size}}
+					</td>
+					<td>
+						{{feat.joinDate}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

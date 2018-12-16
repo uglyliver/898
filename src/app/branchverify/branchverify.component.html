@@ -1,0 +1,25 @@
+
+
+<div style="overflow-x: hidden; min-width: 100vw; background-color: #151922; min-height: 100vh " align="center">
+
+  <div style="min-width: 300px; width:50%;">
+    <div class="container">
+      <h1 align="center" style="color: #fafafa">Branch Manager emailVerify</h1>
+      <form style="margin:20px;" [formGroup]="regForm" (ngSubmit)="login(password.value)" >
+        <div class="form-group">
+          <label for="password" style="color: white">Set Password</label>
+          <input formControlName="password" type="password" #password id="password" class=" uk-input uk-fprm-success form-control is-invalid" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" style="color: red">Password is required</div>
+            <div *ngIf="f.password.errors.minlength" style="color: red">Password must be at least 6 characters</div>2
+          </div> 
+          <p style="font-size: 15px;color: orange">{{verify_msg}}</p>
+        </div><div class="form-group">
+          <button class="btn btn-primary uk-button uk-button-secondary uk-button-small">Submit and verify</button>
+        </div><div>
+          </div>
+          </form>
+        </div>
+      </div>
+
+    </div>

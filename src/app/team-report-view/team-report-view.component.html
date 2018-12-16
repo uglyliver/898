@@ -1,0 +1,229 @@
+<div class="panel-header panel-header-sm" id="top">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View Weekly reports Of your branch Employees</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+	<div *ngIf="weekbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: black; background-color: #e0f7fa" align="center">
+					<div class="card-header" align="center">
+						<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h4 align="center" style="color: black">
+							Search For Specific Period History
+							</h4>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+						<h5 class="title">View Weekly Employee Reports</h5>
+					</div>
+					<div  class="card-body" align="left">
+						<ul uk-accordion style="display: flex;flex-direction: column;">
+							<ng-container *ngFor="let feat of this.reportarr; index as i">
+								<ng-container *ngIf="feat.employeeId == employeeid">
+									<ng-container *ngFor="let feats of feat.reports">
+										<ng-container  *ngIf="((feats.report | slice:0:10)>=startdate && (feats.report | slice:0:10)<=enddate) || (startdate == undefined && enddate == undefined)">
+										<span class="">
+											<a class="uk-accordion-title" href="#" style="font-size: 18px">Week Number: {{feats.weeknum}}&nbsp;&nbsp;&nbsp;  <b>{{feats.report | slice:0:10}}</b></a>
+											<p style="font-size:13px"><b>Title:</b> {{feats.title}}</p>
+											<div class="uk-accordion-content">
+												<p style="color: black"> {{feats.description}} <br></p>
+												<div class="col-md-6">
+													<div class="form-group">
+														<div class="table-responsive" style="min-height: 30vh">
+															<p style="font-size: 15px"><b>Attachments</b></p>
+															<table class="table" >
+																<thead class=" text-primary">
+																	<th>
+																		File name 
+																	</th>
+																	<th>
+																		Action
+																	</th>
+																</thead>
+																<tbody>
+																	<tr *ngFor="let file of feats.files">
+																		<td>
+																			<p>{{file.filename}}</p>
+																		</td>
+																		<td>
+																			<a target="blank" href="{{envin2 + '/commerce/download/report/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</span>
+									</ng-container></ng-container></ng-container></ng-container>
+								</ul>
+							</div>
+							<button class="btn btn-neutral btn-sm" (click)="close_week()">
+							go back?</button>
+						</div>
+					</div>
+				</div>
+</div>
+
+
+<div *ngIf="monthbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; ">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card"style="color: black; background-color: #e0f7fa" align="center">
+				<div class="card-header" align="center">
+					<h5 class="title">View Monthly Employee Report</h5>
+				</div>
+				<div  class="card-body" align="left">
+					<ul uk-accordion style="display: flex;flex-direction: column;">
+						<ng-container *ngFor="let month of this.monthno; index as i">
+							<span class="" >
+
+								<a class="uk-accordion-title" href="#" style="font-size: 18px"><b>Month Number: {{month}}</b></a>
+								<div class="uk-accordion-content">
+									<ul uk-accordion style="display: flex;flex-direction: column;">
+										<ng-container *ngFor="let feat of this.reportarr; index as i">
+											<ng-container *ngIf="feat.employeeId == employeeid">
+												<ng-container *ngFor="let feats of feat.reports">
+													<ng-container *ngIf="(feats.report | slice:5:7) == month">
+														<span>
+															{{feats.report| slice:5:7 }}
+															<a class="uk-accordion-title" href="#" style="font-size: 18px">Week Number: {{feats.weeknum}}&nbsp;&nbsp;&nbsp;  <b>{{feats.report | slice:0:10}}</b></a>
+															<p style="font-size:13px"><b>Title:</b> {{feats.title}}</p>
+															<div class="uk-accordion-content">
+																<p style="color: black"> {{feats.description}} <br> </p>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<div class="table-responsive" style="min-height: 30vh">
+																			<p style="font-size: 15px"><b>Attachments</b></p>
+																			<table class="table" >
+																				<thead class=" text-primary">
+																					<th>
+																						File name 
+																					</th>
+																					<th>
+																						Action
+																					</th>
+																				</thead>
+																				<tbody>
+																					<tr *ngFor="let file of feats.files">
+																						<td>
+																							<p>{{file.filename}}</p>
+																						</td>
+																						<td>
+																							<a target="blank" href="{{envin2 + '/commerce/download/report/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</span>
+													</ng-container>
+												</ng-container>
+											</ng-container>
+										</ng-container>
+									</ul>
+								</div>
+							</span>
+						</ng-container>
+					</ul>
+				</div>
+							<button class="btn btn-neutral btn-sm" (click)="close_month()">
+							go back?</button>
+						</div>
+					</div>
+				</div>
+</div>
+
+
+				<div class="card-header">
+					<h4 class="card-title">All Employees in Branch</h4>
+					<div class="col-md-12">
+					<label style="color: black">Search Employee</label>
+					<input style="color: black" type="text" #sync [(ngModel)]="emp_sync" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+				</div>
+				</div>
+
+
+				<div class="card-body">
+					<div class="table-responsive" style="min-height: 30vh">
+						<table class="table" >
+							<thead class=" text-primary">
+								<th>
+									Serial No.
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Email
+								</th>
+								<th>
+									type
+								</th>
+								<th>
+									role
+								</th>
+								<th>
+									View Reports
+								</th>
+							</thead>
+							<tbody>
+								<tr *ngFor="let feat of this.brancharray; index as i2">
+
+	<ng-container *ngIf="feat.name.startsWith(emp_sync)">
+									<td style="margin-left: 0.2vw">
+										{{i2 + 1}}
+									</td>
+									<td>
+										{{feat.name}}
+									</td>
+									<td>
+										{{feat.email}}
+									</td>
+									<td>
+										{{feat.type}}
+									</td>
+									<td>
+										{{feat.role}}
+									</td>
+									<td>
+										<button (click)="open_report(feat.id, feat.branchid, 'week')" class="btn btn-primary" style="background-color: orange" >
+											View
+										</button>
+								</td></ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+</div>
+
+

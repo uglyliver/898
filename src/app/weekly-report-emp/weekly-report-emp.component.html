@@ -1,0 +1,174 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit Reports Here.</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+		<div class="card-header">
+	  <h6 class="card-title">Save and Submit Report:</h6>
+	  <div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-12 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: red">Report Title</label>
+	  								<input type="text" [value]="title" #some1 id="some1" placeholder="eg, Web Design Part 3" class="form-control"  name="some1">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-12 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: red">Report Content</label>
+	  								<textarea [value]="descvar" #some2 id="some2" class="form-control"  name="some2"></textarea>
+	  							</div>
+	  						</div>	
+	  					</div>
+	  					<div class="row" *ngIf="!savebool">
+	  						<div class="col-md-6">
+	  							<div class="form-group">
+	  								<label style="color: red">{{msg1}}</label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white; background-color: #e91e63" (click)="save(some1.value, some2.value)" >Save</button>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6">
+	  							<div class="form-group">
+	  								<label style="color: red">{{msg2}}</label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit(some1.value, some2.value)" >Submit</button>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6">
+	  							<div class="form-group">
+	  										<div class="table-responsive" style="min-height: 30vh">
+										<p style="font-size: 15px"><b>Attachments</b></p>
+										<table class="table" >
+											<thead class=" text-primary">
+												<th>
+													File name 
+												</th>
+												<th>
+													Action
+												</th>
+											</thead>
+											<tbody>
+												<tr *ngFor="let file of filearr">
+													<td>
+														<p>{{file.filename}}</p>
+													</td>
+													<td>
+														<a target="blank" href="{{envin2 + '/commerce/download/report/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6">
+	  							<div class="form-group">
+	  								<angular-file-uploader  style="color: white"
+										[config]="afuConfig"
+										[resetUpload]=resetVar
+										(ApiResponse)="DocUpload($event)">
+									</angular-file-uploader>
+	  							</div>
+	  						</div>
+	  					</div>
+	  					<div class="row" *ngIf="savebool" >
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<label style="color: red">{{msg3}}</label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white; background-color: orange" (click)="add(some1.value, some2.value)">Add</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+  </div>
+<div class="card-header">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: black; background-color: white" align="center">
+					<div class="card-header" align="center">
+						<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 align="center" style="color: black">
+							Search For Specific Period History
+							</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+						<h5 class="title">View Your Weekly Reports</h5>
+					</div>
+					<div class="card-body" align="left">
+						<ul uk-accordion style="display: flex;flex-direction: column;">
+					<ng-container *ngFor="let feat of this.rarr; index as i">
+					<ng-container  *ngIf="((feat.report | slice:0:10)>=startdate && (feat.report | slice:0:10)<=enddate ) || (startdate == undefined && enddate == undefined)">
+							<span class="">
+								<a class="uk-accordion-title" href="#" style="font-size: 18px">Week Number: {{feat.weeknum}}&nbsp;&nbsp;&nbsp;  <b>{{feat.report | slice:0:10}}</b></a>
+								<p style="font-size:13px"><b>Title:</b> {{feat.title}}</p>
+								<div class="uk-accordion-content">
+								<p style="color: black"> {{feat.description}} <br></p>
+								<div class="col-md-12">
+	  							<div class="form-group">
+	  										<div class="table-responsive" style="min-height: 30vh">
+										<p style="font-size: 15px"><b>Attachments</b></p>
+										<table class="table" >
+											<thead class=" text-primary">
+												<th>
+													File name 
+												</th>
+												<th>
+													Action
+												</th>
+											</thead>
+											<tbody>
+												<tr *ngFor="let file of feat.files">
+													<td>
+														<p>{{file.filename}}</p>
+													</td>
+													<td>
+														<a target="blank" href="{{envin2 + '/commerce/download/report/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+	  							</div>
+	  						</div>
+						</div>
+							</span>
+						</ng-container></ng-container>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>			
+		</div>
+	</div>
+
+

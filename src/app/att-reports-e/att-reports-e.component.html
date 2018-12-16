@@ -1,0 +1,176 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Add Shifts and set Overtime details for your employees</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+		<div *ngIf="overtimebool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000;">
+			<div class="row" >
+				<div class="col-md-12" >
+					<div class="card"style="color: white; background-color: darkviolet" >
+						<div class="card-header">
+							<h5 class="title">Manage Overtime Request</h5>
+						</div>
+						<div class="card-header">
+						<h6 class="title">Employee Proposal</h6>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<p style="color: white">Requested Hours per week: 50</p>
+										</div>
+									</div>
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<p style="color: white">Convert to: Pay</p>
+										</div>
+									</div>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<p style="color: white">Description: I hereby request you to provide me with 50 hours of overtime per week which is to be converted to pay.</p>
+										</div>
+									</div>
+								</div>		
+							</form>
+						</div>
+							<div class="card-header">
+						<h6 class="title">Your Current Grant</h6>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<p style="color: white">Given Hours per week: 40</p>
+											
+										</div>
+									</div>
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<p style="color: white">To Be Converted to: Holiday</p>
+										</div>
+									</div>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<p style="color: white">Description: 40 hours given towards Overtime</p>
+										</div>
+									</div>
+								</div>		
+							</form>
+						</div>
+						<div class="card-header">
+						<h6 class="title">Update Your Current Grant</h6>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label style="color: white">Hours per week:
+											</label>
+											<input type="text" #some1 id="some1" class="form-control"  name="some1">
+										</div>
+									</div>
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label style="color: white">To Be Converted to</label>
+
+
+	  								<div style="display: flex;flex-direction: row; " >
+	  									<div  ngbDropdown>
+	  										<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+	  											Select
+	  										</button>
+	  										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+	  											<a *ngFor="let feat of this.work_con; index as i" class="dropdown-item" (click)="sel(feat)">{{feat}}</a>
+	  										</div>
+	  									</div>
+	  									<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+	  										<input type="text" disabled="" class="form-control" value="{{selval}}">
+	  									</div>
+	  								</div>
+										</div>
+									</div>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: white">Description:</label>
+											<textarea #some3 id="some3" class="form-control"  name="some3"></textarea>
+										</div>
+									</div>
+								</div>	
+								<div class="row" align="center">
+									<div class="col-md-12 pr-1">
+										<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_prop(feat.id)">Submit</button>
+									</div>
+									<div class="col-md-12 pr-1" align="center">
+										<button  class="btn btn-primary "  style="color: white" (click)="open_overtime('0','0')">go back?</button>
+									</div>
+								</div>	
+							</form>
+						</div>
+					</div>
+				</div>
+</div>
+</div>
+	<div class="card-header">
+		<h4 class="card-title">All Employees in Branch</h4>
+	</div>
+<div class="card-body">
+<div class="table-responsive" style="min-height: 30vh">
+<table class="table">
+<thead class=" text-primary">
+	<th>
+		Serial No.
+	</th>
+	<th>
+		Name
+	</th>
+	<th>
+		Email
+	</th>
+	<th>
+		type
+	</th>
+	<th>
+		role
+	</th>
+	<th>
+		Overtime
+	</th>
+	<th>
+		View Attendance
+	</th>
+</thead>
+<tbody>
+<tr *ngFor="let feat of this.brancharray; index as i2">
+	<td style="margin-left: 0.2vw">
+		{{i2 + 1}}
+	</td>
+	<td>
+		{{feat.name}}
+	</td>
+	<td>
+		{{feat.email}}
+	</td>
+	<td>
+		{{feat.type}}
+	</td>
+	<td>
+		{{feat.role}}
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_overtime('0','0')">Approve</button>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="del_edit(feat.id)">View</button>
+	</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+

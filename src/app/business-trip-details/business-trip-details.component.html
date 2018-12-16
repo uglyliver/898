@@ -1,0 +1,210 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Equipments here</h6>
+</div>
+<div  class="col-md-12" id="top">
+	<div *ngIf="countrybool" style="position: absolute;z-index: 1000;width: 100%; display: flex;flex-direction: row;flex-wrap: wrap; justify-content: center;background-color: darkviolet">
+		<form style="padding: 30px;">
+			<div class="row" >
+				<div class="col-md-12 pr-1">
+					<div class="form-group">
+						<label style="color: white" ><br><br>Country Name Search</label>
+						<input type="text" #sync [(ngModel)]="country_sync" id="sync" class="form-control"  name="sync" placeholder="eg, India " >
+					</div>
+				</div>
+				<div class="col-md-12 pr-1">
+					<ng-container *ngFor="let v of this.country">
+						<ng-container *ngIf="v.country.startsWith(country_sync)">
+							<button class="btn btn-primary" (click)="sel_country(v.country)">{{v.country}}
+							</button>
+						</ng-container>
+					</ng-container>
+				</div>
+				<div class="col-md-12 pr-1" align="center">
+					<button class="btn btn-neutral btn-sm" (click)="close_country()">
+						go back?
+					</button></div>
+				</div>
+			</form>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Create Rules</h4>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="row" >
+						<div class="col-md-6 pr-1">
+							<div class="form-group"> <!-- for disabled color #616161 -->
+								<label style="color: blue">Select Country</label>
+								<button class="btn btn-primary " style="width: 100%; background-color: #4dd0e1" (click)="open_country()">Open
+								</button>
+								<input type="text"  class="form-control" disabled="" [value]="country_val" >
+							</div>
+						</div>
+						<div class="col-md-6 pr-1">
+							<div class="form-group"> <!-- for disabled color #616161 -->
+								<label style="color: blue">Select Expense Category</label>
+								<div  ngbDropdown>
+									<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: orange" ngbDropdownToggle>
+										Select
+									</button>
+									<div class="dropdown-menu dropdown-menu-left btn-block" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a *ngFor="let cat of catarr" class="dropdown-item" (click)="set_cat(cat.name)">{{cat.name}}</a>
+									</div>
+								</div>
+								<input type="text"  class="form-control" disabled="" [value]="catset" >
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group"> <!-- for disabled color #616161 -->
+								<label style="color: blue" >Expense Name</label>
+								<input type="text" id="exp_name" #exp_name placeholder="eg, Flight" class="form-control"  >
+							</div>
+						</div>
+
+						<div class="col-md-4 pr-1">
+							<div class="form-group"> <!-- for disabled color #616161 -->
+								<label style="color: blue">Limit Value <span style="color: red" >(only numbers)</span> </label>
+								<input type="text" id="exp_val" #exp_val placeholder="eg, 1000" class="form-control"  >
+							</div>
+						</div>
+						<div class="col-md-4 pr-1">
+							<div class="form-group"> <!-- for disabled color #616161 -->
+								<label style="color: blue">Limit Per day</label>
+								<div  ngbDropdown>
+									<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: orange" ngbDropdownToggle>
+										{{perdayval || 'Select'}}
+									</button>
+									<div class="dropdown-menu dropdown-menu-left btn-block" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a class="dropdown-item" (click)="perday('Yes')">Yes</a>
+										<a class="dropdown-item" (click)="perday('No')">No</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label > </label>
+								<button class="btn btn-primary btn-block" (click)="rule_add(country_val,exp_name.value,exp_val.value)">Create Rule
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="card-header">
+				<h4 class="card-title">Expense Category addition</h4>
+				<form>
+					<div class="row" >
+						<div class="col-md-6 pr-1">
+							<div class="form-group">
+								<label style="color: black">Expense Name</label>
+								<input type="text" #expname id="expname" class="form-control"  name="expname" placeholder="eg, Fooding" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label > </label>
+								<button class="btn btn-primary btn-block" style="" (click)="cat_add(expname.value)">Create Category
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Name
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.catarr; index as i2">
+								<td>
+									{{feat.name}}
+								</td>
+								<td>
+									<button class="btn btn-primary btn-block" style="color: white"
+									(click)="cat_del(feat.id)">Delete</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="card-header">
+				<h4>Current Rules List</h4>
+				<div  class="card-body">
+					<div class="table-responsive" style="min-height: 30vh">
+						<table class="table" >
+							<thead class=" text-primary">
+								<th>
+									Country Name
+								</th>
+								<th>
+									Expense Category
+								</th>
+								<th>
+									Per Day?
+								</th>
+								<th>
+									Expense Name
+								</th>
+								<th>
+									Limit
+								</th>
+								<th>
+									Action
+								</th>
+							</thead>
+							<tbody>
+								<tr *ngFor="let feat of this.rulearr; index as i2">
+									<td>
+										{{feat.country}}
+									</td>
+									<td>
+										{{feat.category}}
+									</td>
+									<td>
+										{{feat.perDay}}
+									</td>
+									<td>
+										{{feat.name}}
+									</td>
+									<td>
+										<ng-container *ngIf="edit2">{{feat.value}}</ng-container>
+										<ng-container *ngIf="!edit2">
+											<input [(ngModel)]="feat.value" type="text">
+										</ng-container>
+
+									</td>
+									<td>
+										<ng-container *ngIf="edit2">
+											<button class="btn btn-primary btn-block" style="color: white"
+											(click)="rule_edit1(feat.id)">Edit</button>
+										</ng-container>
+										<ng-container *ngIf="!edit2">
+
+											<button class="btn btn-primary btn-block" style="color: white"
+											(click)="rule_edit2(feat.value)">Submit</button>
+										</ng-container>
+									</td>
+									<td>
+										<button class="btn btn-primary btn-block" style="color: white"
+										(click)="rule_del(feat.id)">Delete</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+

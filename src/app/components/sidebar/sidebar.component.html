@@ -1,0 +1,19 @@
+
+<div class="logo">
+    <a href="" class="simple-text logo-mini">
+     
+    </a>
+    <a href="" class="simple-text logo-normal">
+       Root Admin <br>Dashboard
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a [routerLink]="[menuItem.path]">
+                <i class="now-ui-icons {{menuItem.icon}}"></i>
+                <p style="transform: scale(1.3);">&nbsp;&nbsp;&nbsp;{{menuItem.title}}<b></b></p>
+            </a>
+        </li>
+    </ul>
+</div>

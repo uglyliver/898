@@ -1,0 +1,95 @@
+<div  style="background-color: black;height: 10vh;"></div>
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<h4 class="card-title">View Employee Types and Assign Holiday types</h4>
+		</div>
+		<div *ngIf="benbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: darkviolet" >
+						<div class="card-header">
+							<h5 class="title">Add Employee Benefits</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: white">All Holiday Types</label>
+											<button *ngFor="let feat of data.typearr; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="selben(i,{name: feat.name,days: feat.days})">{{feat.name}}</button>
+										</div>
+									</div>
+									<br><br>
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label style="color: white">Selected Types</label>
+											<button *ngFor="let feat2 of this.selectedtypes; index as i" class="btn btn-primary btn-block"  style="color: white;width: 50%" (click)="selben2(i,feat2)">{{feat2.name}}</button>
+										</div>
+									</div>
+									<br><br><br>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_type()">Submit</button>
+
+
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: orange;background-color: transparent;" (click)="closeben()">Go back?</button>
+
+
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<thead class=" text-primary">
+						<th>
+							Employee Types
+						</th>
+						<th></th><th>View & Delete types</th>
+						<th>Actions</th>
+					</thead>
+					<tbody>
+						<tr  *ngFor="let feat of this.data.emptypearr index as i" id="feat{{i}}" > 
+							<td>
+								{{feat.name}}
+							</td><td>
+							</td><td>
+								<div  ngbDropdown>
+									<div  ngbDropdown>
+										<button id="dropdownConfig" class="btn btn-primary " ngbDropdownToggle>
+											View & Delete
+										</button>
+										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+											<ng-container *ngFor="let feat2 of this.data.typeres index as i2">
+												<ng-container *ngIf="feat2.employee == feat.name">
+											<a    class="dropdown-item" (click)="drop_typerel(feat2.id)">{{feat2.holiday}}</a>
+											</ng-container>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td>
+								<button class="btn btn-primary btn-block" (click)="opnben(feat.name,feat.id,feat.id)">Assign</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

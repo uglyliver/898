@@ -1,0 +1,254 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, file grievance and Disciplinary.</h6>
+</div>
+
+<div class="col-md-12" id="top">
+	<div class="card">
+		<div *ngIf="book_bool;" class="main-content" style="width: 99%; position: absolute; z-index: 10000; background-color: #1c2b36" align="center">
+				<div class="card-body">
+		<div class="col-md-12">
+			<div class="card-header"><h4 style="color: white">Book Appointment</h4></div>
+			<form>
+				<div class="row">
+					<div class="col-md-12 pr-1">
+						<div class="form-group">
+							<label style="color: white">Title</label>
+							<input type="number" #title id="title" placeholder="eg, Regarding Web Design" class="form-control" name="title">
+						</div>
+					</div>
+					<div class="col-md-12 pr-1">
+						<div class="form-group">
+							<label style="color: white">Description</label>
+							<textarea name="" id="desc" class="form-control" #desc name="desc" style="color: white"></textarea>
+						</div>
+					</div>
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label style="color: white">Time in Minutes</label>
+							<input type="number" #time id="time" placeholder="eg, 15" class="form-control" name="time">
+						</div>
+					</div>
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label style="color: black"></label>
+			<button  class="btn btn-primary btn-block"  style="color: white" (click)="apply(title.value,desc.value, time.value)">Apply for selected employees</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<label style="color: white">Search Employee</label>
+			<input style="color: black" type="text" #sync [(ngModel)]="emp_sync" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+		</div>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table">
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Email
+					</th>
+					<th>
+						type
+					</th>
+					<th>
+						role
+					</th>
+					<th>
+						Select/UnSelect
+					</th>
+				</thead>
+				<tbody>
+<tr *ngFor="let feat of this.brancharray; index as i2">
+	<ng-container *ngIf="feat.name.startsWith(emp_sync)">
+	<td style="margin-left: 0.2vw; color: white">
+		{{i2 + 1}}
+	</td>
+	<td style="color: white">
+		{{feat.name}}
+	</td>
+	<td style="color: white">
+		{{feat.email}}
+	</td>
+	<td style="color: white">
+		{{feat.type}}
+	</td>
+	<td style="color: white">
+		{{feat.role}}
+	</td>
+	<td>
+		<ng-container *ngIf="feat.select == '1'"><button  class="btn btn-primary btn-block"  style="color: white" (click)="unselect_emp(i2)">UnSelect</button></ng-container>
+		<ng-container *ngIf="feat.select != '1'"><button  class="btn btn-primary btn-block"  style="color: white" (click)="select_emp(i2)">Select</button></ng-container>
+</ng-container>
+</tr>
+</tbody>
+</table>
+<button class="btn btn-danger" (click)="book_close()">Go Back?</button>
+</div>
+</div>
+			</div>
+			<div *ngIf="uploadbool2;" class="main-content" style="width: 99%; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+			<div class="row" align="center">
+		
+		<div class="col-md-12 pr-1">
+			<div class="table-responsive" style="min-height: 30vh">
+				<p style="font-size: 15px"><b>Your Attachments</b></p>
+				<table class="table" >
+					<thead class=" text-primary">
+						<th>
+							File name 
+						</th><th>
+							Uploader
+						</th>
+						<th>
+							Action
+						</th>
+					</thead>
+					<tbody>
+
+						<tr *ngFor="let file of filesarr2">
+							<td>
+								<p>{{file.filename}}</p>
+							</td>
+							<td>
+							<ng-container *ngIf="file.party==1" ><p>Employee</p></ng-container>
+							<ng-container *ngIf="file.party==2"><p>Manager</p></ng-container>
+							</td>
+							<td>
+								<a target="blank" href="{{envin2 + '/commerce/download/comp/' + file.fileid}} " class="btn btn-primary" style="color: white">Download</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<button class="btn btn-primary btn-block" style="color: white" (click)="close_upload2()"
+					>Go Back?</button>
+		</div>
+			</div>
+			</div>
+	<div class="card-header">
+    </div>
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-12">
+					<button class="btn btn-danger btn-block" style="color: white;background-color: #197cd3"
+					(click)="book_open()">Book New Appointment</button>
+				    </div>
+				    <div class="col-md-12">
+					<button class="btn btn-primary btn-block" style="color: white; background-color: white">History</button>
+				    </div>
+				</div>
+			</div>
+			<div  class="card-body">
+				<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h5 align="center" style="color: black">
+							All Appointments You Booked <p>(Search For Specific Period History)</p>
+							</h5>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Title
+							</th>
+							<th>
+								Description
+							</th>
+							<th>
+								Start Time
+							</th>
+							<th>
+								End Time
+							</th>
+							<th>
+								Participants
+							</th>
+							<th>
+								Status
+							</th>
+							<th>Change Time</th>
+							<th>
+								Actions
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.comparr; index as i2">
+								<ng-container *ngIf="true">
+									<ng-container  *ngIf="(feat.lodged>=startdate && feat.lodged<=enddate) || (startdate == undefined && enddate == undefined)">
+								<td style="margin-left: 0.2vw">
+									{{i2 + 1}}
+								</td>
+								<td>
+									title
+								</td>
+								<td>
+									desc
+								</td>
+								<td>
+									starttime
+								</td>
+								<td>
+									endtime
+								</td>
+								<td>
+
+									<div  ngbDropdown>
+										<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: orange" ngbDropdownToggle>
+											View Level
+										</button>
+										<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+											<a class="dropdown-item" (click)="open_history(feat.id, feat.branchid, 'day')">Daily</a>
+											<a class="dropdown-item" (click)="open_history(feat.id, feat.branchid, 'week')">Weekly</a>
+											<a class="dropdown-item" (click)="open_history(feat.id, feat.branchid, 'month')">Monthly</a>
+											<a class="dropdown-item" (click)="open_history(feat.id, feat.branchid, 'year')">Yearly</a>
+										</div>
+									</div> 
+								</td>
+								<td>
+									Status
+								</td>
+								<td>
+									<button class="btn btn-primary" (click)="book(feat.id)">Book</button>
+								</td>
+								<td>
+									<button class="btn btn-primary" (click)="rebook(feat.id)">Reapply</button>
+								</td>
+							</ng-container></ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+

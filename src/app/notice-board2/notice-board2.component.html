@@ -1,0 +1,26 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Notices</h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+		<div class="card-header" align="center">
+			<h3 class="card-title" align="center">Notice Board</h3>
+			<div class="card-body">
+					<div style="width: 85%;margin-left: 6%; margin-right: 6% ">
+							<div class="desksc" style="" >
+									<ng-container *ngFor="let feat of this.filesarr; index as i">
+									<ng-container *ngIf="feat.title <= today && feat.description >= today">
+									<img [src]="feat.src" [alt]="feat.filename">
+									</ng-container>
+									</ng-container>
+									<button type="button" class="slick-next">Next</button>
+									<button type="button" class="slick-prev">Previous</button>
+								
+
+							</div>
+						</div>
+
+		</div>
+	</div>
+
+

@@ -1,0 +1,18 @@
+
+<div  *ngIf="this.verify_bool; else register" id="mobile" style="background-color: darkviolet; height: 100vh; min-height: 100vh;margin-top: 0vh;" class="uk-height-medium uk-background-cover uk-dark"  uk-img><div>
+<p align="center" style="padding-top: 30vh;color: white">
+You have been verified, Congratulations, Login To view your profile. 
+</p><div align="center">
+<a href=""> Proceed to login</a></div>
+</div>
+</div>
+<ng-template #register>
+	<div  style="background-color: darkviolet;height: 100vh; min-height: 100vh;margin-top: 0vh;" class="uk-height-medium uk-background-cover uk-dark"  uk-img><div>
+<p align="center" style="padding-top: 30vh;color: white">
+Sorry, this route isn't what you are looking for, please register First. 
+</p><div align="center">
+<a href=""> Proceed to Register</a>
+</div>
+</div>
+</div>
+</ng-template>

@@ -1,0 +1,100 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, file grievance and Disciplinary.</h6>
+</div>
+
+<div class="col-md-12" id="top">
+	<div class="card">
+	<div class="card-header">
+    </div>
+			<div  class="card-body">
+				<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h5 align="center" style="color: black">
+							All Appointments for You <p>(Search For Specific Period History)</p>
+							</h5>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Created By
+							</th>
+							<th>
+								Title
+							</th>
+							<th>
+								Description
+							</th>
+							<th>
+								Start Time
+							</th>
+							<th>
+								End Time
+							</th>
+							<th>
+								Actions
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.comparr; index as i2">
+								<ng-container *ngIf="true">
+									<ng-container  *ngIf="(feat.lodged>=startdate && feat.lodged<=enddate) || (startdate == undefined && enddate == undefined)">
+								<td style="margin-left: 0.2vw">
+									{{i2 + 1}}
+								</td>
+								<td>
+									by
+								</td>
+								<td>
+									title
+								</td>
+								<td>
+									desc
+								</td>
+								<td>
+									starttime
+								</td>
+								<td>
+									endtime
+								</td>
+								<td>
+									<button class="btn btn-primary" (click)="book(feat.id)">Agree</button>
+								</td>
+								<td>
+									<button class="btn btn-primary" (click)="rebook(feat.id)">Disagree</button>
+								</td>
+							</ng-container></ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+

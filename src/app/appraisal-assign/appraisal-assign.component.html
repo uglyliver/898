@@ -1,0 +1,186 @@
+<!--  view appraisal results of employees and act upon it -->
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Appraisal Assignment</h6>
+</div>
+<div  class="col-md-12" >
+	<div *ngIf="appbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card"style="color: black; background-color: #e0f7fa" align="center">
+					<div  class="card-body" align="left">
+						<ul uk-accordion style="display: flex;flex-direction: column;">
+								<ng-container   *ngFor="let feat of objarr11; index as i">
+								<ng-container *ngIf="feat.eid == this.eid">
+									<span (click)="select(feat.id)">
+								<a  class="uk-accordion-title" href="#" style="font-size: 15px"><b>{{i+1}}). Objective Description:</b> &nbsp;	<i>{{feat.description}}</i><br><br> </a>
+								<div class="uk-accordion-content">
+									<ul uk-accordion style="display: flex; flex-direction: column;">
+										<ng-container>
+											<ng-container>
+												<span class="">
+													<p style="font-size: 15px">
+														<b>Employee Objective Description:</b> {{cur_desc}} <br>
+													</p>
+													<div>
+														<div class="table-responsive" style="min-height: 30vh">
+															<p style="font-size: 15px"><b>Attachments</b></p>
+															<table class="table" >
+																<thead class=" text-primary">
+																	<th>
+																		File name 
+																	</th>
+																	<th>
+																		Action
+																	</th>
+																</thead>
+																<tbody>
+																	<tr *ngFor="let file of this.filearr">
+																		<td>
+																			<p>{{file.file}}</p>
+																		</td>
+																		<td>
+																			<a  target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white" >Download</a>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</span>
+											</ng-container>
+										</ng-container>
+									</ul>
+								</div>
+								</span>
+								</ng-container>
+								</ng-container>
+						</ul>
+						<p style="font-size: 18px;">Your Remarks:</p>
+						<p style="font-size: 14px;"><b>Current Salary:</b> {{salary}} <b>Current Role:</b> {{role}}</p>
+						<form>
+							<div class="row">
+								<div class="col-md-6 pr-1">
+									<div class="form-group">
+										<label style="color: black">New Salary</label>
+										<input type="text" #some1 id="some1" placeholder="eg, 80000" class="form-control"  name="some1">
+									</div>
+								</div>
+								<div class="col-md-6 pl-1">
+									<div class="form-group">
+										<label style="color: black">New Employee Role</label>
+										<div style="display: flex;flex-direction: row; align-content: center;justify-content: center" >
+											<div  ngbDropdown>
+												<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+													Select
+												</button>
+												<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+													<a *ngFor="let feat2 of this.data.emprolearr index as i" id="feat2{{i}}" class="dropdown-item" (click)="selcoms(feat2.name)">{{feat2.name}}</a>
+												</div>
+											</div>
+											<div style="margin-left: 10px;width: 50%; margin-top: 2%" >
+												<input type="text" disabled="" class="form-control" value="{{selcomsval}}">
+											</div></div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label style="color: black"></label>
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_ed_br({email: this.brancharray[ind].email, name: this.brancharray[ind].name,pan: this.brancharray[ind].pan,type: this.brancharray[ind].type, dob: this.brancharray[ind].dob , salary: some1.value})">Submit</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<button class="btn btn-neutral btn-sm" (click)="close_app()">
+						go back?</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				<div class="col-md-12">
+					<label style="color: black">Select Financial Year</label>
+					<div  ngbDropdown>
+		<button id="dropdownConfig2" class="btn btn-outline-primary btn-block" style="background-color: orange" ngbDropdownToggle>
+			Drop
+		</button>
+		<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			<a class="dropdown-item" *ngFor="let feat of data.finarr" (click)="set_year(feat.id)">{{feat.yearname}}</a>
+			  		</div>
+			  	</div>
+				</div>
+				<div class="col-md-12">
+					<label style="color: black">Search Employee</label>
+					<input style="color: black" type="text" #sync [(ngModel)]="emp_sync" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+				</div>
+				<h4 class="card-title">List View Of Employees</h4>
+			</div>
+			<div  class="card-body">
+				<div class="table-responsive" style="min-height: 30vh">
+					<table class="table" >
+						<thead class=" text-primary">
+							<th>
+								Serial No.
+							</th>
+							<th>
+								Name
+							</th>
+							<th>
+								Email
+							</th>
+
+							<th>
+								Salary
+							</th>
+							<th>
+								type
+							</th>
+							<th>
+								role
+							</th>
+							<th>
+								View & Assign
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let feat of this.brancharray; index as i2">
+								<ng-container *ngIf="feat.name.startsWith(emp_sync)">
+								<td style="margin-left: 0.2vw">
+									{{i2 + 1}}
+								</td>
+								<td>
+									{{feat.name}}
+								</td>
+								<td>
+									{{feat.email}}
+								</td>
+								<td>
+									{{feat.salary}}
+								</td>
+								<td>
+									{{feat.type}}
+								</td>
+								<td>
+									{{feat.role}}
+								</td>
+								<td>
+									<div  ngbDropdown>
+										<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: orange" ngbDropdownToggle>
+											Period
+										</button>
+										<div class="dropdown-menu dropdown-menu-right" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+											<a class="dropdown-item" *ngFor="let feat2 of apparr; index as i" (click)="open_app(feat.id,feat2.id, feat2,i2)">{{feat2.sdate}} <b>To</b> {{feat2.edate}}</a>
+										</div>
+									</div>
+								</td>
+							</ng-container>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+

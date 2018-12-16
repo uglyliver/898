@@ -1,0 +1,216 @@
+
+<div style="min-width: 2000000px; min-height: 2000000px; background-color: #8A0707 ;position: absolute;z-index: 100000; overflow: scroll;" *ngIf="this.result =='result'"></div>
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Branches here</h6>
+</div>
+
+<div  class="col-md-12" >
+	<div class="card">
+		<div class="card" *ngIf="zonebool" style="width: 99%;height:99%;position: absolute;z-index: 10000;background-color: white" >
+			<h5 align="center">Select a Zone</h5>
+			<div class="is-moment-timezone" id="is-moment-timezone">
+				<div class="map" id="map">
+					<h3 class="map-label" id="map-label">
+						<span class="map-label-name" #name id="map-label-name"></span>
+						<span class="map-label-time" id="map-label-time" ></span>
+					</h3>
+					<div class="map-wrap" id="map-wrap">
+						<div class="map-inset" id="map-inset">
+							<div class="map-axis-x" id="map-axis-x"></div>
+							<div class="map-axis-y" id="map-axis-y"></div>
+						</div>
+					</div>
+					<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_zone(1)">Submit Selected Zone</button>
+				</div>
+			</div>
+		</div>
+		<div class="card" *ngIf="zonebool2" style="width: 99%;height:99%;position: absolute;z-index: 10000;background-color: white" >
+			<h5 align="center">Select a Zone</h5>
+			<div class="is-moment-timezone" id="is-moment-timezone">
+				<div class="map" id="map">
+					<h3 class="map-label" id="map-label">
+						<span class="map-label-name" #name2 id="map-label-name"></span>
+						<span class="map-label-time" id="map-label-time" ></span>
+					</h3>
+					<div class="map-wrap" id="map-wrap">
+						<div class="map-inset" id="map-inset">
+							<div class="map-axis-x" id="map-axis-x"></div>
+							<div class="map-axis-y" id="map-axis-y"></div>
+						</div>
+					</div>
+					<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_zone(2)">Submit Selected Zone</button>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="crbranchbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 100; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card" style="color: white; background-color: #197cd3">
+						<div class="card-header">
+							<h5 class="title">Create Branch</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									
+									<div class="col-md-3 pr-1">
+										<div class="form-group">
+											<label style="color: white">Branch Timezone</label>
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_zone2(1)">Pick Zone</button>
+										</div>
+									</div>
+									<div class="col-md-4 pr-1">
+										<div class="form-group">
+
+											<label style="color: white">Selected Zone <span style="color: black">{{zonemsg}}</span></label>
+											<input type="text" disabled="" #some3 id="some3" class="form-control" value="{{selzone}}" name="some3">
+					
+										</div>
+									</div>
+									<div class="col-md-5 pr-1">
+										<div class="form-group">
+											<label style="color: white">Branch Name</label>
+											<input type="text" #some1 id="some1" class="form-control"  name="some1">
+										</div>
+									</div>
+									<div class="col-md-12 px-1">
+										<div class="form-group">
+											<label style="color: white">Branch Address</label>
+											<input type="text" #some2 id="some2" class="form-control"  name="some2">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_cr_br({address: some2.value, timezone: some3.value, name: some1.value})">Submit</button>
+											<button class="btn btn-neutral btn-sm" (click)="gobacktocr()">
+									go back?
+									</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="editbranchbool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; " align="center">
+			<div class="row" >
+				<div class="col-md-12">
+					<div class="card"style="color: white; background-color: #197cd3" >
+						<div class="card-header">
+							<h5 class="title">Edit Branch</h5>
+						</div>
+						<div class="card-body">
+							<form>
+								<div class="row">
+									
+									<div class="col-md-3 pr-1">
+										<div class="form-group">
+											<label style="color: white">Branch Timezone</label>
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_zone2(2)">Pick Zone</button>
+										</div>
+									</div>
+									<div class="col-md-4 pr-1">
+										<div class="form-group">
+											<label style="color: white">Selected Zone <span style="color: black">{{zonemsg2}}</span></label>
+											<input type="text" disabled="" #some3 id="some3" class="form-control" value="{{selzon}}" name="some3">
+					
+										</div>
+									</div>
+									<div class="col-md-5 pr-1">
+										<div class="form-group">
+											<label style="color: white">Branch Name</label>
+											<input type="text" value="{{data.brancharray[i].name}}" #some1 id="some1" class="form-control"  name="some1">
+										</div>
+									</div>
+									<div class="col-md-12 px-1">
+										<div class="form-group">
+											<label style="color: white">Branch Address</label>
+											<input type="text" value="{{data.brancharray[i].address}}" #some2 id="some2" class="form-control"  name="some2">
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button  class="btn btn-primary btn-block"  style="color: white" (click)="submit_edit({address: some2.value, timezone: some3.value, name: some1.value, id: data.brancharray[i].id})">Submit</button>
+											<button class="btn btn-neutral btn-sm" (click)="open_edit()">
+									go back?
+									</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<div class="card-header">
+	<div class="card-header" style="" >
+			<button class="btn btn-primary btn-block" style="color: white" align="center"
+			(click)="gobacktocr()"><h4 class="card-title">Create Branch</h4></button>
+		</div>
+	<h4 class="card-title">List View Of Branches</h4>
+</div>
+<div *ngIf="!crbranchbool;" class="card-body">
+	<div class="table-responsive" style="min-height: 30vh">
+		<table class="table" >
+			<thead class=" text-primary">
+				<th>
+					Serial No.
+				</th>
+				<th>
+					ID No.
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Address
+				</th>
+				<th>
+					Time Zone
+				</th>
+				<th>
+					Actions
+				</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let feat of this.data.brancharray; index as i2">
+					<td style="margin-left: 0.2vw">
+						{{i2 +1}}
+					</td>
+					<td>
+						{{feat.id}}
+					</td>
+					<td>
+						{{feat.name}}
+					</td>
+					<td>
+						{{feat.address}}
+					</td>
+					<td>
+						{{feat.timezone}}
+					</td><td>
+					<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_edit(i2)">Edit</button></td>
+					<td>
+					<button  class="btn btn-primary btn-block"  style="color: white" (click)="del(feat.id)">Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+
+	</div>
+</div>
+
+

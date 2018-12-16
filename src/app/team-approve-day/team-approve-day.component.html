@@ -1,0 +1,280 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Equipments here</h6>
+</div>
+<div  class="col-md-12" id="top">
+	<div class="card">
+		<div *ngIf="daybool;" class="main-content" style="width: 99%;height:90%; position: absolute; z-index: 1000; ">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card"style="color: black; background-color: #e0f7fa" align="center">
+						<div class="card-header" align="center">
+							<h5 class="title">View Daily Employee Holiday Requests</h5>
+						</div>
+						<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 align="center" style="color: black">
+							Search For Specific Period History
+							</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+					</div>
+					<br><br>
+				</form>
+			</div>
+						<div  class="card-body" align="left">
+							<h6>Late Arrivals and other imp flags</h6>
+							<div class="table-responsive" style="min-height: 30vh">
+								<table class="table" >
+									<thead class=" text-primary">
+										<th>
+											Date
+										</th>
+										<th>
+											Holiday Type
+										</th>
+										<th>
+											Full/Half
+										</th>
+										<th>
+											Status
+										</th>
+										<th>
+											Year Id
+										</th>
+										<th>
+											Actions
+										</th>
+									</thead>
+									<tbody>
+										<tr *ngFor="let feat of this.approvalarr1; index as i2">
+											<ng-container *ngIf=" feat.employeeid == empid">
+												<ng-container *ngIf="((feat.date  | slice:0:10) >= startdate && (feat.date  | slice:0:10) <= enddate) || (startdate == undefined && enddate == undefined)" >
+												<td>
+													{{feat.date | slice:0:10}}
+												</td>
+												<td>
+													{{feat.type}}
+												</td>
+												<td>
+													Full
+												</td>
+												<td>
+													<ng-container *ngIf="feat.status == '1' ">
+														Approved
+													</ng-container>
+													<ng-container *ngIf="feat.status!= '1' && feat.status != '2' ">
+														Unapproved
+													</ng-container>
+													<ng-container *ngIf="feat.status == '2' ">
+														Disapproved
+													</ng-container>
+												</td>
+												<td>
+													{{feat.date  | slice:0:4}}
+												</td>
+										<ng-container *ngIf="feat.status!= '1' && feat.status != '2' "><td>
+														<button class="btn btn-primary btn-block" style="color: white"
+														(click)="ap({status: feat.status, id: feat.id, empid: feat.employeeid, type: feat.type},'1')">Approve</button>
+													</td>
+													<td>
+														<button class="btn btn-primary btn-block" style="color: white"
+														(click)="ap({status: feat.status, id: feat.id, empid: feat.employeeid, type: feat.type},'2')">Disapprove</button>
+													</td></ng-container>									
+													<ng-container *ngIf="feat.status== '1' || feat.status == '2' "><td>
+														<button class="btn btn-primary btn-block" style="color: white"
+														disabled="">Approve</button>
+													</td>
+													<td>
+														<button class="btn btn-primary btn-block" style="color: white"
+														disabled="">Disapprove</button>
+													</td></ng-container>
+													<td><button class="btn btn-primary btn-block" style="color: white"
+													(click)="delete_holi({status: feat.status, id: feat.id, empid: feat.employeeid, type: feat.type},'1')">Delete</button></td>
+												</ng-container></ng-container>
+												
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<button class="btn btn-neutral btn-sm" (click)="close_day()">
+						go back?</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			 <div class="card-header"><!-- 
+			 	<h4 class="card-title">Create Equipments</h4> -->
+			 </div>
+			 <div class="card-header">
+			 	<h4 class="card-title">List View Of Holiday Requests</h4>
+			 	<div class="row">
+			 		
+			 	</div>
+			 </div>
+			 <div  class="card-body">
+			 	
+			 	<div class="table-responsive" style="min-height: 30vh" *ngIf="glancebool">
+			 		<table class="table">
+			 			<thead class=" text-primary">
+			 				<th>
+			 					Serial No.
+			 				</th>
+			 				<th>
+			 					Employee Name
+			 				</th>
+			 				<th>
+			 					Date
+			 				</th>
+			 				<th>
+			 					Holiday Type
+			 				</th>
+			 				<th>
+			 					Full/Half
+			 				</th>
+			 				<th>
+			 					Status
+			 				</th>
+			 				<th>
+			 					Year Id
+			 				</th><th>
+			 					Actions
+			 				</th>
+			 			</thead>
+			 			<tbody>
+			 				<tr *ngFor="let feat of this.approvalarr1; index as i2">
+			 					<ng-container *ngIf="((feat.date  | slice:0:10) >= startdate && (feat.date  | slice:0:10) <= enddate) || (startdate == undefined && enddate == undefined)" >
+			 					<td style="margin-left: 0.2vw">
+			 						{{i2 + 1}}
+			 					</td>
+			 					<td>
+			 						{{idtoname(feat.employeeid)}}
+			 					</td>
+			 					<td>
+			 						{{feat.date  | slice:0:10}}
+			 					</td>
+			 					<td>
+			 						{{feat.type}}
+			 					</td>
+			 					<td>
+			 						<ng-container *ngIf="feat.fullday == '1'">
+			 							Full Day
+			 						</ng-container>
+			 						<ng-container *ngIf="feat.fullday == '0' && feat.ampm=='0'">
+			 							AM
+			 						</ng-container>
+			 						<ng-container *ngIf="feat.fullday == '0'  && feat.ampm=='1'">
+			 							PM
+			 						</ng-container>
+			 					</td>
+			 					<td>
+			 						<ng-container *ngIf="feat.status == '1' ">
+			 							Approved
+			 						</ng-container>
+			 						<ng-container *ngIf="feat.status!= '1' && feat.status != '2' ">
+			 							Unapproved
+			 						</ng-container>
+			 						<ng-container *ngIf="feat.status == '2' ">
+			 							Disapproved
+			 						</ng-container>
+			 					</td>
+			 					<td>
+			 						{{feat.date  | slice:0:4}}
+			 					</td>
+								<ng-container *ngIf="today <= (feat.date  | slice:0:10)">
+			 					<td>
+			 						<button class="btn btn-primary btn-block" style="color: white"
+			 						(click)="ap({status: feat.status, id: feat.id, empid: feat.employeeid, type: feat.type},'1')">Approve</button>
+			 					</td>
+			 					<td>
+			 						<button class="btn btn-primary btn-block" style="color: white"
+			 						(click)="ap({status: feat.status, id: feat.id, empid: feat.employeeid, type: feat.type},'2')">Disapprove</button>
+			 					</td>
+			 					</ng-container>
+								<ng-container *ngIf="today > (feat.date  | slice:0:10)">
+			 					<td>
+			 						<button class="btn btn-primary btn-block" style="color: white"
+			 						disabled="">Approve</button>
+			 					</td>
+			 					<td>
+			 						<button class="btn btn-primary btn-block" style="color: white"
+			 						disabled="">Disapprove</button>
+			 					</td>
+			 					</ng-container>
+			 				</ng-container>
+			 				</tr>
+			 			</tbody>
+			 		</table>
+			 	</div>
+			 	<div class="table-responsive" style="min-height: 30vh" >
+
+			 		<table class="table">
+			 			<thead class=" text-primary">
+			 				<th>
+			 					Serial No.
+			 				</th>
+			 				<th>
+			 					Name
+			 				</th>
+			 				<th>
+			 					Email
+			 				</th>
+			 				<th>
+			 					type
+			 				</th>
+			 				<th>
+			 					role
+			 				</th>
+			 				<th>
+			 					Holiday Requests
+			 				</th>
+			 			</thead>
+			 			<tbody>
+			 				<tr *ngFor="let feat of this.emparr; index as i2">
+			 					<td style="margin-left: 0.2vw">
+			 						{{i2 + 1}}
+			 					</td>
+			 					<td>
+			 						{{feat.name}}
+			 					</td>
+			 					<td>
+			 						{{feat.email}}
+			 					</td>
+			 					<td>
+			 						{{feat.type}}
+			 					</td>
+			 					<td>
+			 						{{feat.role}}
+			 					</td>
+			 					<td>
+			 						<div  ngbDropdown>
+			 						<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: orange" ngbDropdownToggle>
+			 							View Level
+			 						</button>
+			 						<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+			 							<a class="dropdown-item" (click)="open_day(feat.id)">Daily</a>
+			 						</div>
+			 						</div>
+				 				</td>
+				 			</tr>
+				 		</tbody>
+				 	</table>
+				 </div>
+				</div>
+			</div>
+		</div>
+
+

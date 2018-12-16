@@ -1,0 +1,78 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 5vh;margin-left: 0.5vw; color: white">Build Organization Chart here</h6>
+</div>
+<div style="display: flex; flex-direction: column; background-color: white; overflow-x: hidden;">
+	<div style="display: flex; flex-direction: row;flex-wrap: wrap; justify-content: space-around;">
+		<div style=" display: flex;flex-direction: column; background-color: white;border: 1px solid #ff5252;">
+			<p style="margin-top: 20px;padding-left: 10px;padding-right: 10px"><b>ALL Available Employees</b><br></p>
+
+			<div>
+			<label style="color: black">Search Employee</label>
+			<input style="color: black" type="text" #sync [(ngModel)]="emp_sync1" id="sync" class="form-control"  name="sync" placeholder="eg, Jhon Doe">
+			</div>
+
+			<div *ngFor="let user of emparr3" style="margin-left: 15px;padding-right: 10px; cursor: pointer;" (click)="set2(user.email)">
+				<div *ngIf="user.name.startsWith(emp_sync1)" style="color: black;">
+			<b>Name:</b> {{user.name}},	<b>Email:</b> {{user.email}}
+			</div>
+		</div>
+		</div>	
+		<div style=" display: flex;flex-direction: column; background-color: white;border: 1px solid #ff5252;">
+			<p style="margin-top: 20px;padding-left: 10px;padding-right: 10px"><b>Employees Present In Chart</b><br></p>
+			<div>
+			<label style="color: black">Search Employee</label>
+			<input style="color: black" type="text" #sync2 [(ngModel)]="emp_sync2" id="sync2" class="form-control"  name="sync2" placeholder="eg, Jhon Doe">
+			</div>
+			<div *ngFor="let user of emparr2" style="margin-left: 15px;padding-right: 10px; cursor: pointer;" (click)="set1(user.email)">
+
+				<div *ngIf="user.name.startsWith(emp_sync1)" style="color: black;">
+			<b>Name:</b> {{user.name}},	<b>Email:</b> {{user.email}}
+			</div></div>
+		</div>	
+	</div>
+	<div style="width: 100%" align="center">
+		<p style="margin-top: 20px"><b>Edit Present Organization Chart</b><br></p>
+		<div style="background-color: white;">
+			<form>
+				<div class="row" align="center">
+					<div class="col-md-4 pr-1">
+						<div class="form-group">
+							<label style="color: black">Selected Parent Node</label>
+							<input [value]="set_val1" disabled="" type="text" #in id="in" placeholder="eg, employee 1" class="form-control" name="in">
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group">
+							<label style="color: black">Selected Child Node</label>
+							<input [value]="set_val2" disabled="" type="text" #in2 id="in2" placeholder="eg, employee 2" class="form-control" name="in">
+						</div>
+					</div>
+					<div class="col-md-4 pr-1">
+						<div class="form-group">
+							<label style="color: black">Selected Node Role</label>
+							<input type="text" #in3 id="in3" placeholder="eg, hr" class="form-control" name="in3">
+						</div>
+					</div>
+
+					<div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label style="color: black"></label>
+							<button style="padding: 15px" class="btn btn-primary btn-block" (click)="s(in.value,in2.value,in3.value)">ADD</button>
+						</div>
+					</div><div class="col-md-6 pr-1">
+						<div class="form-group">
+							<label style="color: black"></label>
+							<button style="padding: 15px" class="btn btn-primary btn-block" (click)="s2(in.value)">Delete</button>
+						</div>
+					</div>
+						</div>
+					</form>
+
+		<p style="margin-top: 20px"><b>View Present Organization Chart</b><br></p>
+					<div style=" direction: rtl;overflow: scroll;right: 0;max-width: 100%; position: relative;">
+						<ng2-org-chart style="right: 0" [topEmployee]="topEmployee"></ng2-org-chart>
+					</div>
+				</div>
+
+			</div>
+		</div>

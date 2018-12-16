@@ -1,0 +1,132 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Set public holidays here</h6>
+</div>
+<div  class="col-md-12" id="top">
+	<div  class="card-body" *ngIf="!selbool2">
+	<h5>Select a Financial Year</h5>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					
+					<th>
+						Year Name
+					</th>
+					<th>
+						Start Date
+					</th>
+					<th>
+						End Date
+					</th><th>Actions</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.finarr; index as i2">
+						
+						<td>
+							{{feat.yearname}}
+						</td>
+						<td>
+							{{feat.sdate | slice:0:10}}
+						</td>
+						<td>
+							{{feat.edate | slice:0:10}}
+						</td>
+						<td *ngIf="feat.edate > data.sdate">
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="createcalendar(feat.sdate, feat.id)">Select</button>
+						</td>
+						<td *ngIf="feat.edate <= data.sdate">
+							<button class="btn btn-primary btn-block" disabled="" style="color: white"
+							>Select</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card" align="center">
+		<div class="card-header" align="center">
+			
+			<h4 class="card-title">Create Public Holidays</h4>
+		
+		</div>
+		<div *ngIf="selbool;"  style="width: 100%; position: absolute; z-index: 1000; border: 1px;border-color: orange; " align="center">
+			<div class="row" align="center">
+				<div class="col-md-12" align="center">
+					<div class="card"style="color: white; background-color: #00897b">
+						<div class="card-header">
+							<h5 class="title">Set Holiday</h5>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label style="color: black">Enter Holiday Name</label>
+								<input type="text" #some2 id="some2" class="form-control"  name="some2" >
+							</div>
+							<button  class="btn btn-outline-primary" style="background-color: blue; margin: 2%;" (click)="submit_holiday(some2.value)">
+								Submit
+							</button>
+							<button class="btn btn-outline-primary" style="background-color: black" (click)="closesel()">
+								Back
+							</button>
+							<button class="btn btn-danger" (click)="del_holi()">
+								Delete
+							</button>
+						<!-- 	<button  class="btn btn-outline-primary" style="background-color: black" (click)="del_holiday()">
+							Delete
+						</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body" *ngIf="!selbool;">
+			<div  style="display: flex;flex-direction: row;flex-flow: wrap;">
+				<div class="calendar" style="background-color: #b9f6ca " *ngFor="let month of fmontharray; index as i"><div class="calendar-navs">
+					<div  align="center">
+						<span class="p4">{{ info[i][0] }}</span>
+					</div>
+					<div align="center">
+						<span class="p4">{{ info[i][1] }}</span>
+					</div>
+				</div>
+				<div class="month-grid">
+					<div class="day-names">
+						<div *ngFor="let name of dayNames" class="day-name p9">
+							{{ name }}
+						</div>
+					</div>
+					<div class="weeks">
+						<div *ngFor="let week of month" class="week">
+							<ng-container *ngFor="let day of week">
+
+								<div class="week-date disabled" *ngIf="!issame(day.mDate,i) "[ngClass]="{}">
+									<span class="date-text">{{ day.mDate.date() }}</span>
+								</div>
+
+								<div class="week-date disabled2 " *ngIf="((islesser(day.mDate,i) || ishigher(day.mDate,i)) && issame(day.mDate,i)) || !day.future">
+									<span class="date-text">{{ day.mDate.date() }}</span>
+								</div>
+
+								<div  class="week-date enabled"
+								*ngIf="(!isholidayf(day.mDate) && (issame(day.mDate,i) && (!islesser(day.mDate,i) && !ishigher(day.mDate,i)  )))  && day.future"
+								(click)="selectDate(day,i)"
+								[ngClass]="{ isholiday: day.isholiday }">
+								<span class="date-text">{{ day.mDate.date() }}</span>
+								</div>
+
+								<div [attr.data-hover]="day.holidayname" class="week-date enabled isholiday"
+								*ngIf="((isholidayf(day.mDate) &&issame(day.mDate,i) && (!islesser(day.mDate,i) && !ishigher(day.mDate,i) )))  && day.future"
+								(click)="selectDate(day,i)"
+								[ngClass]="{ today: day.today, selected: day.selected}">
+								<span class="date-text">{{ day.mDate.date() }}</span>
+								</div>
+						</ng-container>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+

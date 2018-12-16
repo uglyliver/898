@@ -1,0 +1,150 @@
+
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">View, Edit and Delete your Equipments here</h6>
+</div>
+<div class="card" id="top">
+	<div *ngIf="uploadbool;" class="main-content" style="width: 99%;padding: 30px; position: absolute; z-index: 10000; background-color: #7C8864" align="center">
+			<div class="row" align="center">
+				<h4>Check Attachments By employee post approval(eg, tickets and hotel reservations)</h4>
+		<div class="col-md-12 pr-1">
+			<div class="table-responsive" style="min-height: 30vh">
+				<p style="font-size: 15px"><b>Attachments</b></p>
+				<table class="table" >
+					<thead class=" text-primary">
+						<th>
+							File name 
+						</th>
+						<th>
+							Action
+						</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let file of filesarr">
+							<td>
+								<p>{{file.filename}}</p>
+							</td>
+							<td>
+								<a target="blank" href="{{envin2 + '/commerce/download/' + file.id}} " class="btn btn-primary" style="color: white">Download</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-12" align="center">
+		<button class="btn btn-neutral btn-sm" (click)="close_upload()">
+							go back?</button>
+			</div>
+		</div>
+			</div>
+
+<div class="card-header">
+		
+		<h4 class="card-title">List View Of your All Business Trips By Employees(chronological order)</h4>
+	</div>
+	<div  class="card-body">
+		<div class="col-md-12">
+				<form>
+					<div class="row">
+						<div class="col-md-12">
+							<h3 align="center" style="color: black">
+							Search For Specific Period History
+							</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">&nbsp;&nbsp;&nbsp; Start Date</label>
+								<input type="date" [(ngModel)]="startdate" class="form-control" id="start" #start name="start">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label style="color: black">End Date</label>
+								<input type="date" [(ngModel)]="enddate" class="form-control" id="end" #end name="end">
+							</div>
+						</div>
+					</div>
+					<br><br>
+				</form>
+			</div>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Employee Id
+					</th>
+					<th>
+						Country
+					</th>
+					<th>
+						Currency
+					</th>
+					<th>
+						Reason
+					</th>
+					<th>
+						Departure
+					</th>
+					<th>
+						Arrival
+					</th>
+					<th>
+						Budget
+					</th>
+					<th>
+						Approval Status
+					</th>
+					<th>
+						Approve?
+					</th>
+					<th>
+						Post Approval Attachments
+					</th>
+				</thead>
+				<tbody>
+
+
+<ng-container *ngFor="let feat of this.triparr; index as i2">
+<ng-container *ngFor="let feat2 of feat.trips">
+<tr>
+	<ng-container  *ngIf="(feat2.dateDep>=startdate && feat2.dateDep<=enddate) || (startdate == undefined && enddate == undefined)">
+	<td>
+		{{idtoname(feat.employeeId)}}
+	</td>
+	<td>
+		{{feat2.country}}
+	</td>
+	<td>
+		{{feat2.currency}}
+	</td>
+	<td>
+		{{feat2.reason}}
+	</td>
+	<td>
+		{{feat2.dateDep}}
+	</td>
+	<td>
+		{{feat2.dateArr}}
+	</td>
+	<td>
+		{{feat2.estBud}}
+	</td>
+	<td>
+		<ng-container *ngIf="feat2.approved=='1'">Approved</ng-container>
+		<ng-container *ngIf="feat2.approved!='1'">Unapproved</ng-container>		
+	</td>
+	<td> 
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="approve(feat2.id)">Approve</button>
+	</td>
+	<td>
+		<button  class="btn btn-primary btn-block"  style="color: white" (click)="open_down(feat2)">View</button>
+	</td>
+</ng-container>
+</tr>
+</ng-container>
+</ng-container>
+</tbody>
+</table>
+</div>
+</div>
+</div>

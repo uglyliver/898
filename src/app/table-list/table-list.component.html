@@ -1,0 +1,161 @@
+<div style="width: 100%; height: 20vh;background-color: black" align="center">
+  <h2  style="padding-top:10vh;color: white" >Tax Config</h2>
+</div>
+<div align="center" style="width: 100%;margin-top: 5vh" style="background-color: white" id="top">
+
+
+  <div *ngIf="countrybool" style="position: absolute;z-index: 1000;width: 100%; display: flex;flex-direction: row;flex-wrap: wrap; justify-content: center;background-color: darkviolet">
+    <form style="padding: 30px;">
+        <div class="row" >
+          <div class="col-md-12 pr-1">
+            <div class="form-group">
+              <label style="color: white" ><br><br>Country Name Search</label>
+              <input type="text" #sync [(ngModel)]="country_sync" id="sync" class="form-control"  name="sync" placeholder="eg, India " >
+            </div>
+          </div>
+          <div class="col-md-12 pr-1">
+        <ng-container *ngFor="let v of this.country; index as i">
+        <ng-container *ngIf="v.country.startsWith(country_sync)">
+          <button class="btn btn-primary" (click)="sel_country(v.country,i)">{{v.country}}
+          </button>
+        </ng-container>
+        </ng-container>
+        </div>
+        <div class="col-md-12 pr-1" align="center">
+        <button class="btn btn-neutral btn-sm" (click)="close_country()">
+                  go back?
+                </button></div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="col-md-6" align="center">
+    <div class="card" style="background-color: darkviolet">
+      <div class="card-header">
+        <h5 class="title" style="color: white">Enter Configs</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <button class="btn btn-block btn-primary" (click)="open_country()">OPEN</button>
+                <label style="color: white">Country Name</label>
+                 <input type="text" disabled="" [value]="co_code[this.i].country" style="color: black" class="form-control" placeholder="XXX">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label style="color:white">Country Code</label>
+                <input type="text" disabled="" [value]="co_code[this.i].abbreviation" style="color: black" class="form-control" placeholder="XXX">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label style="color: white">Currency name</label>
+                <input type="text" disabled="" [value]="co_cur[this.i].currency_name" class="form-control" placeholder="XXX">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <label style="color: white">Tax Percentage</label>
+                <input type="text" id="tax" #tax name="tax" class="form-control" placeholder="xx.xx">
+              </div>
+            </div>
+           <!--  <div class="col-md-12 pr-1">
+             <div class="form-group">
+               <label style="color: white">Tax Description</label>
+               <textarea type="text" id="tax2" #tax2 name="tax2" class="form-control" placeholder="Tax Description"></textarea>
+             </div>
+           </div> -->
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-1">
+              <div class="form-group">
+                <button  class="btn btn-primary btn-block" (click)="tax21(co_code[this.i].country,co_code[this.i].abbreviation, co_cur[this.i].currency_name,tax.value )" style="color: white" >Create</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div style="background-color: white" class="card-header">
+    <div >
+      <h4 class="card-title">List View Of Tax Configurations</h4>
+    </div></div>
+    <div class="card-body" style="background-color: white">
+      <div class="table-responsive" style="min-height: 30vh">
+        <table class="table" >
+          <thead class=" text-primary">
+            <th>
+              ID
+            </th>
+            <th>
+             Country Name
+            </th>
+            <th>
+              Country Code
+            </th>
+            <th>
+              Currency Code
+            </th>
+            <th>
+              Tax Percentage
+            </th>
+            <th>
+              Country Flag 
+            </th>
+            <th>
+              Actions
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feat of this.taxarr; index as i2">
+              <td style="margin-left: 0.2vw">
+                <ng-container>{{feat.id}}</ng-container>
+              </td>
+              <td>
+                <ng-container>{{feat.country}}</ng-container>
+              </td>
+              <td>
+                <ng-container>{{feat.countrycode}}</ng-container>
+              </td>
+              <td>
+                <ng-container>{{feat.currency}}</ng-container>
+              </td>
+              <td>
+                <ng-container *ngIf="switchbool">{{feat.taxper}}</ng-container>
+                <ng-container *ngIf="!switchbool">
+                  <input type="text" #a5 id="a5" name="a5" [(ngModel)]="feat.taxper" style="color: black">
+                </ng-container>
+              </td>
+              <td>
+                <img [src]="'assets/flag/'+(feat.countrycode | lowercase)+'.svg' " style="max-width: 100px; max-height: 100px" [alt]="feat.country">
+              </td>
+              <td>
+                <ng-container *ngIf="switchbool">
+                <button class="btn btn-primary btn-block" (click)="switch_ed()">Edit</button>
+                </ng-container>
+                <ng-container *ngIf="!switchbool">
+                  <button class="btn btn-primary btn-block" (click)="submit_ed(feat.id, feat.country, feat.countrycode, feat.currency, feat.taxper)">Submit</button>
+                </ng-container>
+              </td>
+              <td>
+                <button class="btn btn-primary btn-block" (click)="del_tax(feat.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>

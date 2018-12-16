@@ -1,0 +1,339 @@
+<div class="panel-header panel-header-sm">
+	<h6 style="margin-top: 1vh;margin-left: 0.5vw; color: white">Set Configurations For attendance, Shifts, Working days/hours, Financial Year </h6>
+</div>
+<div  class="col-md-12" >
+	<div class="card">
+	 <div class="card-header">
+	  <h4 class="card-title">Set Financial year</h4> <br>
+	  <h6 class="card-title">Current Financial year:</h6>
+	  <p>Name: {{data.yearname}}, Start date: {{data.sdate}}, End date: {{data.edate}}</p>
+	  <h6 class="card-title">Update Financial year:</h6>
+	  <div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Financial Year Name</label>
+	  								<input type="text" #some1 id="some1" placeholder="eg, 2018-2019" class="form-control"  name="some1">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-6 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Start Date</label>
+	  								<input type="date" #some2 id="some2" class="form-control"  name="some2" >
+	  							</div>
+	  						</div>
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="fin_year({yearname: some1.value, sdate: some2.value, edate: ''})">Submit</button>
+	  								<!-- set_limit('year' ,{yearname: some1.value, sdate: some2.value})-->
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+	<div  class="card-body">
+	<h5>List View of Current Financial Years</h5>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Year Name
+					</th>
+					<th>
+						Start Date
+					</th>
+					<th>
+						End Date
+					</th><th>Actions</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.finarr; index as i2">
+						<td style="margin-left: 0.2vw">
+							{{i2 + 1}}
+						</td>
+						<td>
+							{{feat.yearname}}
+						</td>
+						<td>
+							{{feat.sdate | slice:0:10}}
+						</td>
+						<td>
+							{{feat.edate | slice:0:10}}
+						</td>
+						<td>
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="set_limit('year' ,{yearname: feat.yearname, sdate: feat.sdate, yid: feat.id})">Select</button>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="drop_year(feat.id)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-header">
+		<h4 class="card-title">Branch Shifts</h4><br>
+		<h6 class="card-title">Create Shift</h6>
+		<div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Shift Name</label>
+	  								<input type="text" #some4 id="some4" placeholder="eg, 9am-5pm" class="form-control"  name="some4">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Start time</label>
+	  								<button  class="btn btn-primary"  (click)="open2()">Pick</button>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 px-1">
+	  							<div class="form-group">
+	  								<label style="color: black">End Time</label>
+	  								<button  class="btn btn-primary"  (click)="open3()">Pick</button>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 px-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Core Hours Start Time</label>
+	  								<button  class="btn btn-primary"  (click)="open4()">Pick</button>
+	  							</div>
+	  						</div>
+	  						<div class="col-md-2 px-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Core Hours End Time</label>
+	  								<button  class="btn btn-primary"  (click)="open5()">Pick</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-12">
+	  							<div class="form-group">
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="create_shift({name: some4.value, stime: selectedTime, etime: selectedTime2, cstime: selectedTime3, cetime: selectedTime4})">Submit</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+	 
+	<div  class="card-body">
+	<h5>List View of Current Branch Shifts</h5>
+		<div class="table-responsive" style="min-height: 30vh">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>
+						Serial No.
+					</th>
+					<th>
+						Shift Name
+					</th>
+					<th>
+						Start Time
+					</th>
+					<th>
+						End Time
+					</th>
+					<th>
+						Core hours Start Time
+					</th><th>
+						Core hours End Time
+					</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feat of this.data.shift_array; index as i2">
+						<td style="margin-left: 0.2vw">
+							{{i2 + 1}}
+						</td>
+						<td>
+							{{feat.name}}
+						</td>
+						<td>
+							{{feat.stime}}
+						</td>
+						<td>
+							{{feat.etime}}
+						</td>
+						<td>
+							{{feat.cstime}}
+						</td>
+						<td>
+							{{feat.cetime}}
+						</td>
+						<td>
+							<button class="btn btn-primary btn-block" style="color: white"
+							(click)="drop_shift(feat.id)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-header">
+		<h4 class="card-title">Set Work Hours and Days</h4>
+		<h6>Minimum work hours per day</h6>
+		<h6>Current: {{data.minWH}} hours</h6>
+		<h6>Update:</h6>
+		<div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Min hours per Day</label>
+	  								<input type="text" #some7 id="some7" placeholder="eg, 8" class="form-control"  name="some7">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4">
+	  							<div class="form-group">
+	  								<label style="color: black"></label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="set_limit('minday',some7.value)">Submit</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	  <h6>Minimum work hours per Week</h6>
+		<h6>Current: {{data.minWHW}} hours</h6>
+		<h6>Update:</h6>
+		<div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Min hours per Week</label>
+	  								<input type="text" #some8 id="some8" placeholder="eg, 40" class="form-control"  name="some8">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4">
+	  							<div class="form-group">
+	  								<label style="color: black"></label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="set_limit('minweek',some8.value)">Submit</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+	  <h6>Maximum work hours per Day</h6>
+		<h6>Current: {{data.maxWH}} hours</h6>
+		<h6>Update:</h6>
+		<div class="row" >
+	  	<div class="col-md-12">
+	  		<div class="card"style=" background-color: white">
+	  			<div class="card-body">
+	  				<form>
+	  					<div class="row">
+	  						<div class="col-md-4 pr-1">
+	  							<div class="form-group">
+	  								<label style="color: black">Max hours per Day <span style="color: red">*(a weeks work shouldn't be completed in 2 days)</span></label>
+	  								<input type="text" #some9 id="some9" placeholder="eg, 16" class="form-control"  name="some9">
+	  							</div>
+	  						</div>
+	  						<div class="col-md-4">
+	  							<div class="form-group">
+	  								<label style="color: black"></label>
+	  								<button  class="btn btn-primary btn-block"  style="color: white" (click)="set_limit('maxday',some9.value)">Submit</button>
+	  							</div>
+	  						</div>
+	  					</div>
+	  				</form>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+
+	  <h6>Working Days of Branch</h6>
+		<h6>Current: {{displayday}}</h6>
+		<h6>Update:</h6>
+		<div class="row" >
+	  	<div class="col-md-12">
+	<div class="card"style=" background-color: white">
+		<div class="card-body">
+			<form>
+				<div class="row">
+					<div class="col-md-6 pl-1">
+						<div class="form-group">
+							<label style="color: black">Start Day</label>
+							<div style="display: flex;flex-direction: row; " >
+								<div  ngbDropdown>
+									<button id="dropdownConfig" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+										Select Day
+									</button>
+									<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+										<a *ngFor="let feat of this.dayarr; index as i" class="dropdown-item" (click)="sel(feat,i)">{{feat}}</a>
+									</div>
+								</div>
+								<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+									<input type="text" disabled="" class="form-control" value="{{selval}}">
+								</div></div>
+							</div>
+						</div>
+						<div class="col-md-6 pl-1">
+	  		<div class="form-group">
+	  			<label style="color: black">End Day</label>
+	  			<div style="display: flex;flex-direction: row; " >
+	  				<div  ngbDropdown>
+	  					<button id="dropdownConfig2" class="btn btn-outline-primary" style="background-color: black" ngbDropdownToggle>
+	  						Select Day
+	  					</button>
+	  					<div class="dropdown-menu dropdown-menu-left" id="selectedcomsize2" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+	  						<a *ngFor="let feat of this.dayarr; index as i" class="dropdown-item" (click)="sel2(feat,i)">{{feat}}</a>
+	  					</div>
+	  				</div>
+	  				<div style="margin-left: 10px; width: 50%;margin-top: 2%" >
+	  					<input type="text" disabled="" class="form-control" value="{{selval2}}">
+	  				</div>
+	  			</div>
+	  			</div>
+	  		</div>
+	  		<div class="col-md-4">
+	  			<div class="form-group">
+	  				<label style="color: black"></label>
+	  				<button  class="btn btn-primary btn-block"  style="color: white" (click)="set_limit('days',0)">Submit</button>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
